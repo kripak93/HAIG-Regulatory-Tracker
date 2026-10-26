@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Pipeline runtime artifacts (regenerated each run)
+snapshot.json
+diff_report.txt
+raw_livecompliance.html
+
+# Scratch / source material
+extracted/
+.vscode/
+deals_raw.txt
+
+# --- Social media project (separate project, not part of the automation repo) ---
+social_animation.html
+social_animation_seekable.html
+social_animation.gif
+race_seekable.html
+race_data.js
+funding_race.gif
+parse_deals.py
+build_race_data.py
+render_gif.py
+raw_deals.txt
+deals_clean.csv

@@ -1,0 +1,38 @@
+name: Monthly AI legislation scan
+
+# Runs the fetch -> normalize -> dedupe -> diff step on a schedule and uploads
+# the diff report as an artifact. It deliberately does NOT merge: a human
+# reviews diff_report.txt, then runs the pipeline locally with --merge (or a
+# maintainer dispatches the merge workflow) to apply changes.
+
+on:
+  schedule:
+    - cron: "0 6 1 * *"   # 06:00 UTC on the 1st of each month
+  workflow_dispatch: {}    # allow manual runs from the Actions tab
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scan (report only, no merge)
+        env:
+          LEGISCAN_API_KEY: ${{ secrets.LEGISCAN_API_KEY }}
+        run: python run_pipeline.py
+
+      - name: Upload diff report
+        uses: actions/upload-artifact@v4
+        with:
+          name: diff-report-${{ github.run_id }}
+          path: |
+            diff_report.txt
+            snapshot.json
+          retention-days: 90
