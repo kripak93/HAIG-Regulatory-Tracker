@@ -26,3 +26,5 @@ build_race_data.py
 render_gif.py
 raw_deals.txt
 deals_clean.csv
+livecompliance_page.html
+parse_livecompliance.py
