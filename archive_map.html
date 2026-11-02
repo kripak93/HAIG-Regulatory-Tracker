@@ -9,15 +9,8 @@
   :root{
     --paper:#f6f4ee; --paper-2:#efece2; --ink:#141b2e; --ink-soft:#3c4560;
     --muted:#707a94; --line:#d8d4c4; --accent:#b5502e;
-    /* status-bucket colors */
-    --c-effective:#161f47;
-    --c-enacted:#3f6d95;
-    --c-passed:#7fa8a3;
-    --c-committee:#c6b784;
-    --c-introduced:#dcd6c2;
-    --c-dead:#c2796b;
-    --c-none:#e9e6d8;
-    /* stringency 0-4 scale */
+    --c-effective:#161f47; --c-enacted:#3f6d95; --c-passed:#7fa8a3;
+    --c-committee:#c6b784; --c-introduced:#dcd6c2; --c-dead:#c2796b; --c-none:#e9e6d8;
     --s0:#e9e6d8; --s1:#bcd0c9; --s2:#7fa8a3; --s3:#3f6d95; --s4:#161f47;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -31,8 +24,7 @@
   .controls{display:flex;flex-wrap:wrap;gap:16px;margin:18px 0;align-items:flex-end;}
   .ctrl{display:flex;flex-direction:column;gap:4px;}
   .ctrl label{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
-  .ctrl select{font-family:'Inter',sans-serif;font-size:.85rem;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 12px;min-width:200px;cursor:pointer;}
-  .ctrl select:focus{outline:2px solid var(--accent);border-color:var(--accent);}
+  .ctrl select,.ctrl input{font-family:'Inter',sans-serif;font-size:.85rem;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 12px;min-width:180px;cursor:pointer;}
   .tally{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-left:auto;align-self:center;}
   .timeline{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:16px;}
   .tl-toggle{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-soft);cursor:pointer;}
@@ -42,18 +34,18 @@
   #tlSlider{flex:1;min-width:240px;cursor:pointer;accent-color:var(--accent);}
   .tl-readout{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--ink);white-space:nowrap;}
   .tl-play button{font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;background:var(--ink);color:var(--paper);border:none;border-radius:16px;padding:6px 14px;cursor:pointer;}
-  .legend{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);margin-bottom:16px;flex-wrap:wrap;}
+  .legend{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);margin-bottom:10px;flex-wrap:wrap;}
   .legend .sw{display:inline-flex;align-items:center;gap:5px;}
   .legend .chip{width:14px;height:14px;border-radius:3px;border:1px solid rgba(0,0,0,.12);}
-  /* tile-grid map */
-  .map{display:grid;grid-template-columns:repeat(11,1fr);gap:5px;max-width:720px;margin:0 auto;}
-  .cell{aspect-ratio:1/1;border-radius:5px;background:var(--c-none);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;cursor:default;position:relative;transition:transform .1s,box-shadow .1s;border:1px solid rgba(0,0,0,.06);}
-  .cell.has:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(20,27,46,.18);z-index:2;}
-  .cell .abbr{font-size:.66rem;font-weight:600;}
-  .cell .n{font-size:.6rem;opacity:.85;}
-  .cell.dark .abbr,.cell.dark .n{color:#fff;}
-  .empty{visibility:hidden;}
-  .panel{max-width:720px;margin:20px auto 0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-height:60px;}
+  .mapwrap{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;}
+  svg{width:100%;height:auto;display:block;}
+  path.state{stroke:#fff;stroke-width:.8;cursor:default;transition:opacity .12s;}
+  path.state.has{cursor:pointer;}
+  path.state.has:hover{opacity:.82;stroke:var(--ink);stroke-width:1.4;}
+  .state-label{font-family:'IBM Plex Mono',monospace;font-size:8px;fill:#fff;pointer-events:none;text-anchor:middle;font-weight:500;}
+  .state-label.dark-ink{fill:var(--ink-soft);}
+  .tooltip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.72rem;padding:6px 9px;border-radius:6px;opacity:0;transition:opacity .1s;white-space:nowrap;z-index:5;font-family:'IBM Plex Mono',monospace;}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-height:60px;margin-top:16px;}
   .panel h3{font-family:'Source Serif 4',Georgia,serif;font-size:1.05rem;margin-bottom:4px;}
   .panel .hint{color:var(--muted);font-size:.8rem;}
   table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:10px;}
@@ -70,7 +62,7 @@
   <div class="masthead">
     <div class="eyebrow">AI Regulatory Tracker · Exhaustive Archive</div>
     <h1>Healthcare AI Legislation by State</h1>
-    <p class="subhead">Every bill from every source, every status — enacted, pending, and dead. Filter by lifecycle status and category; the map recolors by how many bills in each state match. Dead/failed bills are kept and labeled, never dropped.</p>
+    <p class="subhead">Every bill from every source, every status — enacted, pending, and dead. Filter by lifecycle status and category; the map recolors by status or 0–4 stringency. Dead/failed bills are kept and labeled, never dropped.</p>
   </div>
 
   <div class="controls">
@@ -91,7 +83,7 @@
     </div>
     <div class="ctrl">
       <label for="searchBox">Search bills</label>
-      <input id="searchBox" type="text" placeholder="bill #, text…" style="font-family:'Inter',sans-serif;font-size:.85rem;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 12px;min-width:180px;">
+      <input id="searchBox" type="text" placeholder="bill #, text…">
     </div>
     <div class="tally" id="tally"></div>
   </div>
@@ -106,233 +98,160 @@
   </div>
 
   <div class="legend" id="legend"></div>
-  <div class="map" id="map"></div>
+  <div class="mapwrap">
+    <svg id="map" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="US map of healthcare AI legislation"></svg>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
   <div class="panel" id="panel"><span class="hint">Click a state to list its matching bills.</span></div>
 
   <div class="foot" id="foot"></div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script>
-// US tile-grid layout (row, col) — standard cartogram arrangement.
-const GRID = {
-  AK:[0,0], ME:[0,10],
-  VT:[1,9], NH:[1,10],
-  WA:[2,0], ID:[2,1], MT:[2,2], ND:[2,3], MN:[2,4], IL:[2,5], WI:[2,6], MI:[2,7], NY:[2,8], RI:[2,9], MA:[2,10],
-  OR:[3,0], NV:[3,1], WY:[3,2], SD:[3,3], IA:[3,4], IN:[3,5], OH:[3,6], PA:[3,7], NJ:[3,8], CT:[3,9],
-  CA:[4,0], UT:[4,1], CO:[4,2], NE:[4,3], MO:[4,4], KY:[4,5], WV:[4,6], VA:[4,7], MD:[4,8], DE:[4,9],
-  AZ:[5,1], NM:[5,2], KS:[5,3], AR:[5,4], TN:[5,5], NC:[5,6], SC:[5,7], DC:[5,8],
-  OK:[6,3], LA:[6,4], MS:[6,5], AL:[6,6], GA:[6,7],
-  HI:[7,0], TX:[7,3], FL:[7,8], US:[7,10]
-};
+// FIPS -> USPS so we can key TopoJSON geometries to our bills.json (keyed by USPS)
+const FIPS_TO_USPS = {"01":"AL","02":"AK","04":"AZ","05":"AR","06":"CA","08":"CO","09":"CT","10":"DE","11":"DC","12":"FL","13":"GA","15":"HI","16":"ID","17":"IL","18":"IN","19":"IA","20":"KS","21":"KY","22":"LA","23":"ME","24":"MD","25":"MA","26":"MI","27":"MN","28":"MS","29":"MO","30":"MT","31":"NE","32":"NV","33":"NH","34":"NJ","35":"NM","36":"NY","37":"NC","38":"ND","39":"OH","40":"OK","41":"OR","42":"PA","44":"RI","45":"SC","46":"SD","47":"TN","48":"TX","49":"UT","50":"VT","51":"VA","53":"WA","54":"WV","55":"WI","56":"WY"};
 const NAMES = {AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",DC:"D.C.",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming",US:"Federal"};
-const BUCKET_COLOR = {
-  "Effective":"var(--c-effective)","Enacted":"var(--c-enacted)","Passed":"var(--c-passed)",
-  "In Committee":"var(--c-committee)","Introduced":"var(--c-introduced)","Dead":"var(--c-dead)"
-};
+const BUCKET_COLOR = {"Effective":"var(--c-effective)","Enacted":"var(--c-enacted)","Passed":"var(--c-passed)","In Committee":"var(--c-committee)","Introduced":"var(--c-introduced)","Dead":"var(--c-dead)"};
 const DARK_BUCKETS = new Set(["Effective","Enacted","Dead"]);
+const ORDER=["Dead","Introduced","In Committee","Passed","Enacted","Effective"];
+const STRINGENCY_BANDS=[["None","var(--s0)"],["Non-binding / early","var(--s1)"],["Disclosure","var(--s2)"],["Restricted","var(--s3)"],["Prohibited","var(--s4)"]];
 
-let DATA = null;
-let TL_DATES = [];   // sorted unique effective dates for the slider
-let playTimer = null;
+let DATA=null, TL_DATES=[], playTimer=null, centroids={};
+const unique=a=>[...new Set(a)];
+const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-function unique(arr){return [...new Set(arr)];}
+function stringencyColor(s){return s>=3.5?"var(--s4)":s>=2.5?"var(--s3)":s>=1.5?"var(--s2)":s>0?"var(--s1)":"var(--s0)";}
+function viewMode(){return document.getElementById('viewSel').value;}
+function timelineOn(){return document.getElementById('tlOn').checked;}
+function currentTLDate(){const i=parseInt(document.getElementById('tlSlider').value,10);return TL_DATES[Math.min(i,TL_DATES.length-1)]||TL_DATES[TL_DATES.length-1];}
 
-function init(data){
-  DATA = data;
-  // populate status dropdown
-  const ss = document.getElementById('statusSel');
-  data.status_buckets.forEach(b=>{
-    const o=document.createElement('option'); o.value=b; o.textContent=b+" ("+(data.counts.by_bucket[b]||0)+")"; ss.appendChild(o);
-  });
-  // populate category dropdown from the domains actually present
-  const cs = document.getElementById('catSel');
-  const domains = unique(data.bills.flatMap(b=>b.domains)).sort();
-  domains.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;cs.appendChild(o);});
+Promise.all([
+  fetch('bills.json').then(r=>r.json()),
+  fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(r=>r.json())
+]).then(([data,us])=>{ DATA=data; drawBase(us); init(); })
+ .catch(e=>{ document.getElementById('panel').innerHTML='<span class="hint">Could not load data — run <code>python build_archive.py</code> and serve over http (not file://). '+e+'</span>'; });
 
+function drawBase(us){
+  const svg=d3.select('#map');
+  const states=topojson.feature(us,us.objects.states).features;
+  const path=d3.geoPath(); // us-atlas is pre-projected (albersUsa)
+  svg.selectAll('path.state').data(states).enter().append('path')
+    .attr('class','state').attr('d',path)
+    .attr('data-usps',d=>FIPS_TO_USPS[String(d.id).padStart(2,'0')]||'')
+    .attr('fill','var(--c-none)');
+  // centroids for labels
+  states.forEach(d=>{const u=FIPS_TO_USPS[String(d.id).padStart(2,'0')]; if(u) centroids[u]=path.centroid(d);});
+  const tt=document.getElementById('tooltip');
+  svg.selectAll('path.state')
+    .on('mousemove',function(ev,d){
+      const u=FIPS_TO_USPS[String(d.id).padStart(2,'0')]; if(!u)return;
+      const info=this.__info; if(!info||!info.n){tt.style.opacity=0;return;}
+      tt.innerHTML=NAMES[u]+' · '+info.label;
+      const r=document.querySelector('.mapwrap').getBoundingClientRect();
+      tt.style.left=(ev.clientX-r.left+12)+'px'; tt.style.top=(ev.clientY-r.top+12)+'px'; tt.style.opacity=1;
+    })
+    .on('mouseleave',()=>tt.style.opacity=0);
+}
+
+function init(){
+  const ss=document.getElementById('statusSel');
+  DATA.status_buckets.forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b+" ("+(DATA.counts.by_bucket[b]||0)+")";ss.appendChild(o);});
+  const cs=document.getElementById('catSel');
+  unique(DATA.bills.flatMap(b=>b.domains)).sort().forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;cs.appendChild(o);});
   ss.addEventListener('change',render);
   cs.addEventListener('change',render);
   document.getElementById('viewSel').addEventListener('change',()=>{buildLegend();render();});
   document.getElementById('searchBox').addEventListener('input',render);
-  setupTimeline();
-  buildLegend();
-  render();
-  document.getElementById('foot').textContent =
-    "Sources: "+data.sources.join(", ")+" · generated "+data.generated_at.slice(0,10)+" · schema "+data.schema_version;
+  setupTimeline(); buildLegend(); render();
+  document.getElementById('foot').textContent="Sources: "+DATA.sources.join(", ")+" · generated "+DATA.generated_at.slice(0,10)+" · schema "+DATA.schema_version+" · Federal (US) bills are listed in the panel, not shown on the map.";
 }
-
-const STRINGENCY_BANDS=[
-  ["None","var(--s0)"],["Non-binding / early","var(--s1)"],
-  ["Disclosure","var(--s2)"],["Restricted","var(--s3)"],["Prohibited","var(--s4)"]
-];
-function stringencyColor(score){
-  if(score>=3.5)return "var(--s4)";
-  if(score>=2.5)return "var(--s3)";
-  if(score>=1.5)return "var(--s2)";
-  if(score>0)return "var(--s1)";
-  return "var(--s0)";
-}
-function viewMode(){return document.getElementById('viewSel').value;}
 
 function buildLegend(){
-  const el=document.getElementById('legend');
-  el.innerHTML='';
+  const el=document.getElementById('legend'); el.innerHTML='';
   if(viewMode()==='stringency'){
     el.innerHTML='<span>Shading = strictest live law (0–4)</span>';
-    STRINGENCY_BANDS.forEach(([label,c])=>{
-      const s=document.createElement('span');s.className='sw';
-      s.innerHTML='<span class="chip" style="background:'+c+'"></span>'+label;
-      el.appendChild(s);
-    });
+    STRINGENCY_BANDS.forEach(([l,c])=>{const s=document.createElement('span');s.className='sw';s.innerHTML='<span class="chip" style="background:'+c+'"></span>'+l;el.appendChild(s);});
   }else{
-    el.innerHTML='<span>Shading = matching bills per state</span>';
-    Object.entries(BUCKET_COLOR).forEach(([b,c])=>{
-      const s=document.createElement('span');s.className='sw';
-      s.innerHTML='<span class="chip" style="background:'+c+'"></span>'+b;
-      el.appendChild(s);
-    });
+    el.innerHTML='<span>Shading = most-advanced matching bill</span>';
+    Object.entries(BUCKET_COLOR).forEach(([b,c])=>{const s=document.createElement('span');s.className='sw';s.innerHTML='<span class="chip" style="background:'+c+'"></span>'+b;el.appendChild(s);});
   }
-}
-
-function timelineOn(){return document.getElementById('tlOn').checked;}
-function currentTLDate(){
-  const i=parseInt(document.getElementById('tlSlider').value,10);
-  return TL_DATES[Math.min(i,TL_DATES.length-1)]||TL_DATES[TL_DATES.length-1];
 }
 
 function setupTimeline(){
-  // collect the effective dates that actually exist
-  TL_DATES = unique(DATA.bills.map(b=>b.timeline_date).filter(Boolean)).sort();
-  const sl=document.getElementById('tlSlider');
-  sl.max = Math.max(TL_DATES.length-1,0);
-  sl.value = sl.max;
-
-  document.getElementById('tlOn').addEventListener('change',()=>{
-    document.getElementById('timeline').classList.toggle('on',timelineOn());
-    stopPlay();
-    render();
-  });
+  TL_DATES=unique(DATA.bills.map(b=>b.timeline_date).filter(Boolean)).sort();
+  const sl=document.getElementById('tlSlider'); sl.max=Math.max(TL_DATES.length-1,0); sl.value=sl.max;
+  document.getElementById('tlOn').addEventListener('change',()=>{document.getElementById('timeline').classList.toggle('on',timelineOn());stopPlay();render();});
   sl.addEventListener('input',()=>{stopPlay();render();});
   document.getElementById('tlPlay').addEventListener('click',togglePlay);
 }
-
 function togglePlay(){
   if(playTimer){stopPlay();return;}
   const sl=document.getElementById('tlSlider');
-  if(parseInt(sl.value,10)>=parseInt(sl.max,10)) sl.value=0;
+  if(parseInt(sl.value,10)>=parseInt(sl.max,10))sl.value=0;
   document.getElementById('tlPlay').textContent='❚❚ Pause';
-  playTimer=setInterval(()=>{
-    const v=parseInt(sl.value,10);
-    if(v>=parseInt(sl.max,10)){stopPlay();return;}
-    sl.value=v+1; render();
-  },650);
+  playTimer=setInterval(()=>{const v=parseInt(sl.value,10);if(v>=parseInt(sl.max,10)){stopPlay();return;}sl.value=v+1;render();},650);
 }
-function stopPlay(){
-  if(playTimer){clearInterval(playTimer);playTimer=null;}
-  document.getElementById('tlPlay').textContent='▶ Play';
-}
+function stopPlay(){if(playTimer){clearInterval(playTimer);playTimer=null;}document.getElementById('tlPlay').textContent='▶ Play';}
 
-function matches(bill, status, cat, q){
-  if(timelineOn()){
-    // only laws in effect on-or-before the slider date count
-    if(!bill.timeline_date || bill.timeline_date > currentTLDate()) return false;
-  }else if(status && bill.bucket!==status){
-    return false;
-  }
-  if(cat && !bill.domains.includes(cat)) return false;
-  if(q){
-    const hay=(bill.bill+' '+bill.state+' '+bill.status+' '+(bill.desc||'')+' '+bill.domains.join(' ')).toLowerCase();
-    if(!hay.includes(q)) return false;
-  }
+function matches(b,status,cat,q){
+  if(timelineOn()){ if(!b.timeline_date||b.timeline_date>currentTLDate())return false; }
+  else if(status&&b.bucket!==status)return false;
+  if(cat&&!b.domains.includes(cat))return false;
+  if(q){const hay=(b.bill+' '+b.state+' '+b.status+' '+(b.desc||'')+' '+b.domains.join(' ')).toLowerCase();if(!hay.includes(q))return false;}
   return true;
 }
-
-// dominant bucket for a state's matching bills (most-advanced wins for color)
-const ORDER=["Dead","Introduced","In Committee","Passed","Enacted","Effective"];
-function dominantBucket(bills){
-  let best=null,bi=-1;
-  bills.forEach(b=>{const i=ORDER.indexOf(b.bucket); if(i>bi){bi=i;best=b.bucket;}});
-  return best;
-}
+function dominantBucket(bills){let best=null,bi=-1;bills.forEach(b=>{const i=ORDER.indexOf(b.bucket);if(i>bi){bi=i;best=b.bucket;}});return best;}
 
 function render(){
   const status=document.getElementById('statusSel').value;
   const cat=document.getElementById('catSel').value;
   const q=(document.getElementById('searchBox').value||'').trim().toLowerCase();
-  const map=document.getElementById('map');
-  map.innerHTML='';
 
-  // bucket matching bills by state
-  const byState={};
-  let total=0;
-  DATA.bills.forEach(b=>{
-    if(!matches(b,status,cat,q)) return;
-    (byState[b.state]=byState[b.state]||[]).push(b); total++;
+  const byState={}; let total=0;
+  DATA.bills.forEach(b=>{if(!matches(b,status,cat,q))return;(byState[b.state]=byState[b.state]||[]).push(b);total++;});
+
+  const svg=d3.select('#map');
+  svg.selectAll('.state-label').remove();
+  svg.selectAll('path.state').each(function(d){
+    const u=FIPS_TO_USPS[String(d.id).padStart(2,'0')]; const el=d3.select(this);
+    const bills=u?byState[u]:null;
+    if(bills&&bills.length){
+      let fill,label,dark;
+      if(viewMode()==='stringency'){const mx=Math.max(...bills.map(x=>x.score||0));fill=stringencyColor(mx);label=mx.toFixed(1);dark=mx>=2.5;}
+      else{const dom=dominantBucket(bills);fill=BUCKET_COLOR[dom];label=String(bills.length);dark=DARK_BUCKETS.has(dom);}
+      el.attr('fill',fill).classed('has',true); this.__info={n:bills.length,label:label};
+      el.on('click',()=>showPanel(u,bills));
+      if(centroids[u]){svg.append('text').attr('class','state-label'+(dark?'':' dark-ink')).attr('x',centroids[u][0]).attr('y',centroids[u][1]+3).text(u);}
+    }else{
+      el.attr('fill','var(--c-none)').classed('has',false); this.__info={n:0,label:''}; el.on('click',null);
+    }
   });
 
-  // build 8x11 grid
-  for(let r=0;r<8;r++){
-    for(let c=0;c<11;c++){
-      const abbr=Object.keys(GRID).find(k=>GRID[k][0]===r&&GRID[k][1]===c);
-      const cell=document.createElement('div');
-      cell.className='cell';
-      if(!abbr){cell.classList.add('empty');map.appendChild(cell);continue;}
-      const bills=byState[abbr]||[];
-      if(bills.length){
-        cell.classList.add('has');
-        let label;
-        if(viewMode()==='stringency'){
-          const maxScore=Math.max(...bills.map(b=>b.score||0));
-          cell.style.background=stringencyColor(maxScore);
-          if(maxScore>=2.5)cell.classList.add('dark');
-          label=maxScore.toFixed(1);
-        }else{
-          const dom=dominantBucket(bills);
-          cell.style.background=BUCKET_COLOR[dom];
-          if(DARK_BUCKETS.has(dom))cell.classList.add('dark');
-          label=bills.length;
-        }
-        cell.innerHTML='<span class="abbr">'+abbr+'</span><span class="n">'+label+'</span>';
-        cell.onclick=()=>showPanel(abbr,bills);
-      }else{
-        cell.innerHTML='<span class="abbr" style="opacity:.4">'+abbr+'</span>';
-      }
-      map.appendChild(cell);
-    }
-  }
-  const nStates=Object.keys(byState).length;
+  const nStates=Object.keys(byState).filter(s=>s!=='US').length;
   document.getElementById('tally').textContent=total+" bills · "+nStates+" states";
+  const statusSel=document.getElementById('statusSel'); statusSel.disabled=timelineOn(); statusSel.style.opacity=timelineOn()?.5:1;
+  if(timelineOn()){const dt=currentTLDate();const pretty=dt?new Date(dt+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}):'—';document.getElementById('tlDate').textContent='As of '+pretty;document.getElementById('tlCount').textContent=total+' laws in effect · '+nStates+' states';}
 
-  // timeline readout + lock the status dropdown while in time view
-  const statusSel=document.getElementById('statusSel');
-  statusSel.disabled=timelineOn();
-  statusSel.style.opacity=timelineOn()?.5:1;
-  if(timelineOn()){
-    const d=currentTLDate();
-    const pretty=d?new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}):'—';
-    document.getElementById('tlDate').textContent='As of '+pretty;
-    document.getElementById('tlCount').textContent=total+' laws in effect · '+nStates+' states';
-  }
+  // federal note
+  if(byState['US']&&byState['US'].length){showFederalHint(byState['US'].length);}
 }
 
+let lastPanelState=null;
+function showFederalHint(n){ if(!document.getElementById('panel').dataset.touched){document.getElementById('panel').innerHTML='<span class="hint">Click a state to list its bills. '+n+' federal (US) bill'+(n!==1?'s':'')+' also match — search "US" to see them.</span>';} }
+
 function showPanel(abbr,bills){
-  const p=document.getElementById('panel');
-  const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const p=document.getElementById('panel'); p.dataset.touched='1';
   const rows=bills.sort((a,b)=>ORDER.indexOf(b.bucket)-ORDER.indexOf(a.bucket)).map(b=>
-    '<tr><td><strong>'+b.bill+'</strong>'+
-      (b.source?'<br><a href="'+b.source+'" target="_blank" rel="noopener" style="font-size:.7rem">official source&nbsp;&#8599;</a>':'')+'</td>'+
-    '<td><span class="pill" style="background:'+BUCKET_COLOR[b.bucket]+(DARK_BUCKETS.has(b.bucket)?';color:#fff':'')+'">'+b.status+'</span>'+
-      (b.effective?'<br><span style="font-size:.68rem;color:var(--muted)">eff. '+b.effective+'</span>':'')+'</td>'+
+    '<tr><td><strong>'+b.bill+'</strong>'+(b.source?'<br><a href="'+b.source+'" target="_blank" rel="noopener" style="font-size:.7rem">official source&nbsp;&#8599;</a>':'')+'</td>'+
+    '<td><span class="pill" style="background:'+BUCKET_COLOR[b.bucket]+(DARK_BUCKETS.has(b.bucket)?';color:#fff':'')+'">'+b.status+'</span>'+(b.effective?'<br><span style="font-size:.68rem;color:var(--muted)">eff. '+b.effective+'</span>':'')+'</td>'+
     '<td>'+(b.domains.join(', ')||'—')+'<br><span style="font-size:.66rem;color:var(--muted)">stringency '+(b.score!=null?b.score.toFixed(1):'—')+'</span></td>'+
-    '<td class="desc">'+(b.title?'<span class="billtitle">'+esc(b.title)+'</span>':'')+esc(b.desc)+'</td></tr>'
-  ).join('');
+    '<td class="desc">'+(b.title?'<span class="billtitle">'+esc(b.title)+'</span>':'')+esc(b.desc)+'</td></tr>').join('');
   p.innerHTML='<h3>'+(NAMES[abbr]||abbr)+' · '+bills.length+' bill'+(bills.length!==1?'s':'')+'</h3>'+
     '<table><thead><tr><th>Bill</th><th>Status</th><th>Domain</th><th>What it does</th></tr></thead><tbody>'+rows+'</tbody></table>'+
     '<p style="font-size:.66rem;color:var(--muted);margin-top:8px">Summaries are AI-assisted (via ailawsbystate); the linked official bill text controls.</p>';
 }
-
-fetch('bills.json').then(r=>r.json()).then(init).catch(e=>{
-  document.getElementById('panel').innerHTML='<span class="hint">Could not load bills.json — run <code>python build_archive.py</code> first, and serve this page over http (not file://).</span>';
-});
 </script>
 </body>
 </html>
