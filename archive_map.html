@@ -127,11 +127,21 @@ function viewMode(){return document.getElementById('viewSel').value;}
 function timelineOn(){return document.getElementById('tlOn').checked;}
 function currentTLDate(){const i=parseInt(document.getElementById('tlSlider').value,10);return TL_DATES[Math.min(i,TL_DATES.length-1)]||TL_DATES[TL_DATES.length-1];}
 
+function fatal(msg){
+  const fileProto = location.protocol === 'file:';
+  document.getElementById('map').style.display='none';
+  const extra = fileProto
+    ? '<br><br>It looks like this page was opened directly from disk (<code>file://</code>), which blocks loading the data file. Serve it over HTTP instead:<br><code>python -m http.server</code> then open <code>http://localhost:8000/archive_map.html</code>, or use the hosted version on GitHub Pages.'
+    : '';
+  document.getElementById('panel').innerHTML =
+    '<h3>Map could not load</h3><span class="hint">'+msg+extra+'</span>';
+}
+
 Promise.all([
-  fetch('bills.json').then(r=>r.json()),
-  fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(r=>r.json())
+  fetch('bills.json').then(r=>{if(!r.ok)throw new Error('bills.json HTTP '+r.status);return r.json();}),
+  fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(r=>{if(!r.ok)throw new Error('us-atlas HTTP '+r.status);return r.json();})
 ]).then(([data,us])=>{ DATA=data; drawBase(us); init(); })
- .catch(e=>{ document.getElementById('panel').innerHTML='<span class="hint">Could not load data — run <code>python build_archive.py</code> and serve over http (not file://). '+e+'</span>'; });
+ .catch(e=>{ fatal(String(e)); });
 
 function drawBase(us){
   const svg=d3.select('#map');
