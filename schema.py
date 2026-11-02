@@ -109,7 +109,46 @@ STATUS_NORMALIZE = {
     "withdrawn": "Dead",
     "repealed": "Dead",
     "failed 99-1": "Failed",
+    # Aggregator vocabulary (ailawsbystate and similar)
+    "dead/failed": "Dead",
+    "passed one chamber": "Passed One Chamber",
 }
+
+# --- Status display buckets ----------------------------------------------------
+# Groups the canonical statuses into the coarse lifecycle buckets the archive /
+# map filter exposes. Order matters: it's the legend order on the map.
+STATUS_BUCKETS = [
+    "Effective",      # law is live now
+    "Enacted",        # signed, not yet effective
+    "Passed",         # cleared one or both chambers, awaiting signature
+    "In Committee",   # active, in committee
+    "Introduced",     # active, filed
+    "Dead",           # dead / failed / vetoed — kept for the exhaustive archive
+]
+
+# Map each canonical status onto a display bucket.
+STATUS_TO_BUCKET = {
+    "Effective": "Effective",
+    "Enacted": "Enacted",
+    "Passed Both Chambers": "Passed",
+    "Passed One Chamber": "Passed",
+    "House Passed": "Passed",
+    "Senate Passed": "Passed",
+    "In Committee": "In Committee",
+    "Proposed Rule": "In Committee",
+    "Introduced": "Introduced",
+    "Enforcement Action": "Effective",
+    "Non-Binding Guidance": "In Committee",
+    "Vetoed": "Dead",
+    "Dead": "Dead",
+    "Failed": "Dead",
+    "Unknown": "Introduced",
+}
+
+
+def status_bucket(status: str) -> str:
+    """Map a canonical status onto its coarse lifecycle bucket."""
+    return STATUS_TO_BUCKET.get(status, "Introduced")
 
 # LegiScan numeric status codes -> canonical status.
 # Verified against LegiScan's documented BILL_STATUS enum:
@@ -150,6 +189,29 @@ STRINGENCY_BANDS = [
     (2.5, "Restricted"),
     (3.5, "Prohibited"),
 ]
+
+
+# --- Source category -> canonical domain --------------------------------------
+# Aggregator sources tag each bill with a coarse category. Map those onto the
+# seven canonical domains so a parsed source row classifies deterministically.
+# (No mechanism is inferred here — mechanism stays a human/LLM step.)
+SOURCE_CATEGORY_TO_DOMAIN = {
+    "utilization review": "Utilization Review & Prior Auth",
+    "utilization review & prior auth": "Utilization Review & Prior Auth",
+    "clinical decision making": "Clinical Decision Making",
+    "mental health chatbots": "Behavioral & Mental Health AI",
+    "provider disclosure": "Provider Disclosure",
+    "reimbursement & coverage": "Reimbursement & Coverage",
+    "telehealth operations & consumer protection": "Telehealth Operations & Consumer Protection",
+    "clinical ai oversight (professional bodies)": "Clinical AI Oversight (Professional Bodies)",
+}
+
+
+def category_to_domain(category: str) -> str:
+    """Map a source's coarse category string onto a canonical domain, or ''."""
+    if not category:
+        return ""
+    return SOURCE_CATEGORY_TO_DOMAIN.get(str(category).strip().lower(), "")
 
 
 def normalize_status(raw: str) -> str:
