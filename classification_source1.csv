@@ -1,0 +1,112 @@
+state,bill,domain,mechanism,notes
+AL,HB280,Clinical AI Oversight (Professional Bodies),Study / Non-Binding,Creates state agency to designate an AI health platform; no restriction mechanism
+AL,HB515,Utilization Review & Prior Auth,Outright Ban,Medical-necessity determinations must be made by a licensed physician; AI may not decide
+AL,SB63,Utilization Review & Prior Auth,Outright Ban,Enacted; licensed clinician must make AI-assisted medical-necessity denials; disclosure required
+AL,SB97,Clinical AI Oversight (Professional Bodies),Study / Non-Binding,Companion to HB280; designates AI health platform; no restriction
+AR,HB1297,Utilization Review & Prior Auth,Disclosure Requirement,Insurer AI disclosure of algorithm details in utilization review
+AR,HB1816,Clinical Decision Making,Outright Ban,Bars providers/insurers using AI in delivery of care unless FDA-approved
+AZ,HB2175,Utilization Review & Prior Auth,Outright Ban,Medical director must individually review denials; no sole reliance on AI
+AZ,HB4080,Clinical AI Oversight (Professional Bodies),Study / Non-Binding,AI nursing tasks pilot program; study/pilot
+CA,AB1979,Clinical Decision Making,Outright Ban,Licensed provider must retain independent judgment; AI may not perform licensed clinical function
+CA,AB2575,Clinical Decision Making,Minor Safeguard,Anti-retaliation for clinicians overriding clinical decision support; vetoed
+CA,AB3030,Provider Disclosure,Disclosure Requirement,GenAI patient communications must carry AI disclaimer + human path
+CA,SB1120,Utilization Review & Prior Auth,Outright Ban,Physicians Make Decisions Act; licensed physician must make medical-necessity denials
+CA,SB1146,Provider Disclosure,Advertising Restriction,Health-product ads with AI digital replica of a provider must disclose
+CA,SB503,Clinical Decision Making,Privacy Safeguard,Bias mitigation + documentation for clinical decision support systems
+CA,SB579,Behavioral & Mental Health AI,Study / Non-Binding,Mental health + AI working group; study
+CO,HB1139,Utilization Review & Prior Auth,Outright Ban,AI in UR must use individual clinical info; clinician review of denials
+CO,SB189,Utilization Review & Prior Auth,Disclosure Requirement,ADMT rules for consequential decisions incl health care; documentation/disclosure
+CO,SB24-205,Provider Disclosure,Disclosure Requirement,Colorado AI Act; high-risk AI incl health care; reasonable care + disclosure
+CT,HB5587,Utilization Review & Prior Auth,Outright Ban,Bars AI as primary method to deny claims
+CT,HB5590,Utilization Review & Prior Auth,Outright Ban,Bars AI to deny health insurance claims
+CT,SB447,Utilization Review & Prior Auth,Outright Ban,Bars carriers using AI in evaluation/determination of patient care
+CT,SB817,Utilization Review & Prior Auth,Outright Ban,Bars software tools to automatically downcode/deny claims
+GA,SB444,Utilization Review & Prior Auth,Outright Ban,Enacted; AI may not issue adverse determination without clinical-peer review
+HI,HB1787,Utilization Review & Prior Auth,Outright Ban,UR determinations on individual history; AI may not be sole basis
+HI,HB2537,Utilization Review & Prior Auth,Disclosure Requirement,Patients Bill of Rights; prior-auth deadlines + clinician review
+HI,SB2167,Utilization Review & Prior Auth,Outright Ban,Automated-decision denial must be reviewed/co-signed by clinician
+HI,SB2585,Clinical Decision Making,Study / Non-Binding,AI clearinghouse of evidence-based programs; study/infrastructure
+HI,SB2768,Utilization Review & Prior Auth,Outright Ban,Bars AI to deny/delay/modify care; licensed clinician required
+HI,SB3027,Utilization Review & Prior Auth,Disclosure Requirement,Prior-auth deadlines + written disclosure of automated decisions
+IA,HF2204,Behavioral & Mental Health AI,Minor Safeguard,Chatbot deployer harm protocols + age verification
+IA,HF2635,Utilization Review & Prior Auth,Outright Ban,Enacted; AI for initial UR only; not sole basis for medical-necessity denial
+IA,HF2715,Behavioral & Mental Health AI,Minor Safeguard,AI companion/therapeutic chatbot self-harm protocols + minor safeguards + disclosure
+IA,HSB766,Clinical AI Oversight (Professional Bodies),Outright Ban,Licensure board for autonomous AI medical service providers
+IA,SF2421,Utilization Review & Prior Auth,Outright Ban,AI initial UR only; not sole basis to deny/delay/downgrade
+IA,SF562,Utilization Review & Prior Auth,Disclosure Requirement,UR organizations/prior-auth/medical billing; general
+IL,HB2472,Utilization Review & Prior Auth,Outright Ban,Enacted; algorithmic automated process may not make adverse determinations alone
+IL,HB4804,Clinical AI Oversight (Professional Bodies),Outright Ban,Nurse Practice Act; AI may not substitute for nursing services
+IL,HB5115,Clinical Decision Making,Informed Consent,Hospital must confirm diagnostic algorithm before use
+IL,HB5395,Utilization Review & Prior Auth,Outright Ban,Enacted; automated decision provision in managed-care reform
+IL,HB5649,Behavioral & Mental Health AI,Informed Consent,Mental-health AI services require patient informed consent
+IL,SB3702,Clinical AI Oversight (Professional Bodies),Outright Ban,Nurse Practice Act; AI may not provide nursing in place of RN; consent for recording
+IN,HB1201,Behavioral & Mental Health AI,Representation Restriction,Bars AI impersonating/substituting a licensed mental health professional
+IN,HB1271,Utilization Review & Prior Auth,Outright Ban,Enacted; AI not sole basis to downcode without human review; disclosure
+IN,HB1620,Provider Disclosure,Disclosure Requirement,Provider must disclose AI use in care decisions/communications
+KS,SB467,Utilization Review & Prior Auth,Outright Ban,Medical-necessity determinations must be made by a human; AI transparency
+KY,HB641,Behavioral & Mental Health AI,Minor Safeguard,Mental health chatbot suppliers; therapy-like conversation safeguards
+LA,SB246,Utilization Review & Prior Auth,Outright Ban,No AI use that denies/delays/modifies care; adverse determinations signed by clinician
+LA,SB5,Behavioral & Mental Health AI,Disclosure Requirement,Mental health chatbot must disclose AI; self-harm protocols; privacy
+MA,H1210,Provider Disclosure,Disclosure Requirement,Patients told when health info is AI-generated; carrier AI disclosure
+MA,S2632,Utilization Review & Prior Auth,Outright Ban,AI may not deny/delay/modify care; licensed professional decides; limits AI in therapy
+MA,S46,Utilization Review & Prior Auth,Outright Ban,Insurer AI may not deny/delay/modify; only licensed physician decides
+MD,HB1385,Utilization Review & Prior Auth,Outright Ban,Audits of carrier AI include human evaluation of medical necessity
+MD,HB697,Utilization Review & Prior Auth,Disclosure Requirement,Quarterly carrier reporting on AI/automated-decision use
+MD,HB820,Utilization Review & Prior Auth,Outright Ban,Enacted; AI UR on individual history; physician makes final decision; quarterly reporting
+ME,LD1301,Utilization Review & Prior Auth,Outright Ban,Conditions on carrier AI in medical/UR decisions to approve/deny/delay/modify
+MI,HB4536,Utilization Review & Prior Auth,Outright Ban,Insurer may not deny/modify/delay a claim based on AI review
+MI,HB4537,Utilization Review & Prior Auth,Outright Ban,Medicaid plan may not deny/modify/delay a claim based on AI review
+MN,HF2500,Utilization Review & Prior Auth,Outright Ban,Bars algorithm/AI in prior-authorization approve/deny decisions
+MN,HF4188,Utilization Review & Prior Auth,Outright Ban,Enacted; UR org may not exclusively use AI for adverse determination
+MN,SF3984,Utilization Review & Prior Auth,Outright Ban,Bars algorithm/AI in prior-authorization decisions
+MO,SB1598,Clinical Decision Making,Minor Safeguard,Malpractice liability for negligent provider AI use in diagnosis/treatment
+MS,HB1717,Clinical Decision Making,Disclosure Requirement,Clinical AI contribution to diagnosis/treatment must be disclosed in record
+NC,SB963,Behavioral & Mental Health AI,Minor Safeguard,State license to operate health chatbots; effectiveness/insurance/encryption/audit
+NE,LB77,Utilization Review & Prior Auth,Outright Ban,Enacted; AI not sole basis for denial/delay/modification; disclosure
+NH,HB1406,Utilization Review & Prior Auth,Disclosure Requirement,Carrier recordkeeping on AI in UR; adverse determinations by human
+NJ,S1029,Utilization Review & Prior Auth,Disclosure Requirement,Insurer data collection/reporting on automated utilization-management
+NV,AB295,Utilization Review & Prior Auth,Disclosure Requirement,Prior-auth deadlines; written notice of AI/automated tools
+NY,A11048,Utilization Review & Prior Auth,Disclosure Requirement,AI in UR; notice + submit algorithms/training data to Superintendent
+NY,A1456,Utilization Review & Prior Auth,Disclosure Requirement,Website disclosure of AI-algorithm use in UR
+NY,A3991,Utilization Review & Prior Auth,Outright Ban,AI UR must base determinations on individual history; limits sole reliance
+NY,A3993,Utilization Review & Prior Auth,Privacy Safeguard,Bars discrimination via clinical algorithms in insurer decisions
+NY,A8556,Utilization Review & Prior Auth,Outright Ban,UR agent AI must base on clinical history; safeguards on medical-necessity
+NY,A9149,Utilization Review & Prior Auth,Disclosure Requirement,Website disclosure of AI-algorithm use in UR
+NY,A9219,Clinical AI Oversight (Professional Bodies),Informed Consent,Licensed domain expert must be consulted developing professional AI
+NY,S10241,Utilization Review & Prior Auth,Disclosure Requirement,Same as A11048; AI-use notice + algorithm submission
+NY,S7896,Utilization Review & Prior Auth,Outright Ban,UR agent AI must base on clinical history; limits sole reliance
+OH,HB579,Utilization Review & Prior Auth,Outright Ban,Annual AI reporting; bars AI-only care decisions/denials
+OH,SB164,Utilization Review & Prior Auth,Outright Ban,Annual AI reporting; bars AI-only care decisions/denials
+OK,HB3675,Utilization Review & Prior Auth,Outright Ban,Human professional must review any AI adverse determination
+OK,SB1967,Utilization Review & Prior Auth,Outright Ban,AI tool may not supplant provider decisionmaking in UR
+OR,HB4054,Utilization Review & Prior Auth,Disclosure Requirement,Written notice when AI automatically downcodes a claim
+PA,HB1925,Utilization Review & Prior Auth,Disclosure Requirement,AI in facilities + insurers + MA/CHIP plans; duties + penalties
+PA,HB2175,Behavioral & Mental Health AI,Minor Safeguard,AI chatbots incl mental health; supplier duties + consumer protection
+PA,SB1113,Utilization Review & Prior Auth,Disclosure Requirement,AI in facilities + insurers + MA/CHIP plans; duties + penalties
+RI,H7190,Utilization Review & Prior Auth,Disclosure Requirement,Insurer disclosure to regulators of AI in claims/coverage; recordkeeping
+RI,H7538,Provider Disclosure,Disclosure Requirement,Enacted; provider must notify patients of AI used to document visits
+RI,H8073,Reimbursement & Coverage,Disclosure Requirement,Requires coverage of AI analysis of breast-imaging; coverage mandate
+RI,S2570,Provider Disclosure,Disclosure Requirement,Enacted; provider notification of AI used to document visits
+RI,SB2010,Utilization Review & Prior Auth,Disclosure Requirement,Insurer AI transparency/accountability in coverage and claims
+SC,S443,Utilization Review & Prior Auth,Outright Ban,Coverage decisions may not be based solely on AI; professional decides
+SC,S920,Utilization Review & Prior Auth,Outright Ban,Prior-auth AI on individual history; licensed physician qualified
+SD,SB169,Utilization Review & Prior Auth,Outright Ban,Carrier AI UR on clinical history; not sole reliance on group data
+TN,HB1382,Utilization Review & Prior Auth,Outright Ban,Issuer AI UR must base on enrollee clinical history
+TN,HB1866,Utilization Review & Prior Auth,Outright Ban,Regulate AI in Health Care Act; limits issuer AI UR
+TN,SB1261,Utilization Review & Prior Auth,Outright Ban,Issuer AI UR on individual clinical history not group data
+TN,SB2010,Utilization Review & Prior Auth,Outright Ban,Regulate AI in Health Care Act; limits issuer AI UR
+TX,HB149,Provider Disclosure,Disclosure Requirement,Texas Responsible AI Governance Act; broad; healthcare disclosure duty
+TX,HB2922,Utilization Review & Prior Auth,Outright Ban,UR agent may not use AI as sole basis to deny/delay/modify
+TX,HB4018,Utilization Review & Prior Auth,Outright Ban,UR agent AI must base on clinical history/circumstances
+TX,HB4455,Clinical Decision Making,Disclosure Requirement,Rules for provider AI use; automated-system safeguards
+TX,SB1188,Clinical Decision Making,Informed Consent,EHR law; practitioner AI diagnosis within license; review AI records
+TX,SB1411,Utilization Review & Prior Auth,Privacy Safeguard,Anti-discrimination in AI algorithms for coverage/care
+TX,SB1822,Utilization Review & Prior Auth,Disclosure Requirement,Disclosure of AI-algorithm use in UR; training-data safeguards
+TX,SB815,Utilization Review & Prior Auth,Outright Ban,Enacted; UR agent may not use automated decision system for adverse determination
+US,HB6077,Clinical AI Oversight (Professional Bodies),Study / Non-Binding,Federal; AI-literacy grant program for medical schools
+US,HB7064,Clinical AI Oversight (Professional Bodies),Study / Non-Binding,Federal; HHS study of AI in health care
+US,SB2997,Clinical Decision Making,Minor Safeguard,Federal Right to Override Act; AI/CDSS override policy + committee
+UT,HB452,Behavioral & Mental Health AI,Disclosure Requirement,Enacted; mental-health chatbot AI disclosure + privacy safeguards
+VT,H776,Utilization Review & Prior Auth,Outright Ban,Health-plan AI UR must base on clinical history; limits sole reliance
+VT,H814,Clinical Decision Making,Privacy Safeguard,Enacted; Act 101 neurological rights; mental/neural data privacy
+WA,SB5395,Utilization Review & Prior Auth,Outright Ban,Enacted; AI not sole means to deny/delay/modify; licensed-provider review

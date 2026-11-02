@@ -28,8 +28,29 @@ import score
 from sources import source1_ailawsbystate as src1
 
 ENRICHMENT_CSV = "enrichment_ailawsbystate.csv"
+CLASSIFICATION_CSV = "classification_source1.csv"
 
 TODAY = datetime.now(timezone.utc).date().isoformat()
+
+
+def load_classification(path: str) -> dict:
+    """
+    {(state, bill): {domain, mechanism}} — per-bill domain + mechanism assigned
+    by reading each bill's description. Overrides the coarse category->domain
+    auto-map and supplies the mechanism that drives the stringency score.
+    """
+    out: dict[tuple, dict] = {}
+    if not os.path.exists(path):
+        print(f"  [warn] {path} not found — domains stay coarse, stringency stays 0.")
+        return out
+    with open(path, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            key = (row["state"].strip().upper(), row["bill"].strip().upper())
+            out[key] = {
+                "domain": row.get("domain", "").strip(),
+                "mechanism": row.get("mechanism", "").strip(),
+            }
+    return out
 
 
 def effective_bucket(rec: dict, today: str = TODAY) -> str:
@@ -213,6 +234,21 @@ def main():
         if e.get("summary_caveat"):
             rec["summary_caveat"] = e["summary_caveat"]
     print(f"Enriched {enriched} bills with full descriptions from detail pages.")
+
+    # Overlay per-bill classification: corrected domain + mechanism (-> severity).
+    classif = load_classification(CLASSIFICATION_CSV)
+    reclassed = tagged = 0
+    for rec in records:
+        c = classif.get((rec["state"], rec["bill"]))
+        if not c:
+            continue
+        if c.get("domain") and c["domain"] in schema.DOMAINS:
+            rec["domains"] = [c["domain"]]
+            reclassed += 1
+        if c.get("mechanism"):
+            rec["mechs"] = [c["mechanism"]]
+            tagged += 1
+    print(f"Classified {reclassed} bills into domains; tagged {tagged} with mechanisms.")
 
     write_archive_csv(records, ARCHIVE_CSV)
 
