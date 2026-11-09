@@ -26,6 +26,7 @@ from datetime import datetime, timezone
 import schema
 import score
 from sources import source1_ailawsbystate as src1
+from sources import source2_transparencycoalition as src2
 
 ENRICHMENT_CSV = "enrichment_ailawsbystate.csv"
 CLASSIFICATION_CSV = "classification_source1.csv"
@@ -95,6 +96,7 @@ def load_enrichment(path: str) -> dict:
 # but status still advances to the furthest-along across all sources).
 SOURCES = [
     (src1, "10-31_Source1.html"),
+    (src2, src2.CSV_PATH),
 ]
 
 ARCHIVE_CSV = "bills_archive.csv"

@@ -1,0 +1,16 @@
+state,bill,status,effective,category,desc,source
+AL,SB63,Enacted,2026-10-01,Utilization Review & Prior Auth,Regulates AI use by healthcare insurers for prior authorization; AI decisions must rest on patient history; denials by a licensed physician.,https://legiscan.com/AL/bill/SB63/2026
+CO,HB1139,Enacted,2027-01-01,Utilization Review & Prior Auth,Insurers must base authorization decisions on patient medical history not group data; denial reviewed by a licensed clinician.,https://legiscan.com/CO/bill/HB1139/2026
+GA,SB444,Enacted,2027-01-01,Utilization Review & Prior Auth,Prohibits insurance coverage decisions based solely on AI systems or software tools.,https://legiscan.com/GA/bill/SB444/2025
+IL,SB3114,Passed,,Clinical Decision Making,Prohibits payor from using automated process to downcode a claim bypassing billing info; downcoding must be made or reviewed by a natural person.,https://legiscan.com/IL/bill/SB3114/2025
+IA,HF2635,Enacted,2026-07-01,Utilization Review & Prior Auth,Insurers may use AI for initial prior-auth review but may not deny/delay/downgrade solely on AI.,https://legiscan.com/IA/bill/HF2635/2025
+UT,SB319,Enacted,2027-01-01,Utilization Review & Prior Auth,Insurers must disclose AI use in preauthorization; adverse determination reviewer must use independent medical judgment.,https://legiscan.com/UT/drafts/SB0319/2026
+WA,SB5395,Enacted,2026-06-11,Utilization Review & Prior Auth,Only a licensed physician/professional may deny prior authorization on medical necessity; AI not the sole means to deny/delay/modify.,https://legiscan.com/WA/bill/SB5395/2025
+CO,HB1195,Enacted,2026-08-12,Behavioral & Mental Health AI,Prohibits AI therapy chatbots; limits AI use by licensed psychotherapy providers.,https://legiscan.com/CO/bill/HB1195/2026
+ME,LD2082,Enacted,2026-07-29,Behavioral & Mental Health AI,Prohibits AI therapy/psychotherapy without a licensed professional; unfair trade practice.,https://legiscan.com/ME/bill/LD2082/2025
+RI,S2197,Enacted,2027-01-01,Behavioral & Mental Health AI,Oversight of AI in Mental Health Care Act; bars offering therapy via AI unless licensed provider; no independent AI therapeutic decisions.,https://legiscan.com/RI/bill/S2197/2026
+RI,H7349,Enacted,2027-01-01,Behavioral & Mental Health AI,Companion Act to S2197; Oversight of AI in Mental Health Care Act.,https://legiscan.com/RI/bill/H7349/2026
+TN,SB1580,Enacted,2026-07-01,Behavioral & Mental Health AI,Prohibits deploying an AI system that represents it can act as a qualified mental health professional.,https://legiscan.com/TN/bill/SB1580/2025
+VT,H816,Enacted,2026-06-17,Behavioral & Mental Health AI,Therapy chatbot ban; mental health services must be delivered by professionals not independently by AI.,https://legiscan.com/VT/bill/H0816/2025
+LA,HB475,Enacted,2026-08-01,Provider Disclosure,Licensed professionals must verbally disclose use of recording/transcription software before recording an appointment for AI transcription.,https://legiscan.com/LA/bill/HB475/2026
+UT,SB150,Enacted,2026-03-24,Clinical AI Oversight (Professional Bodies),Scope-of-practice limit; AI that solely advises/treats without practitioner-patient interaction is not a qualifying technology innovation.,https://legiscan.com/UT/bill/SB0150/2026

@@ -110,3 +110,13 @@ UT,HB452,Behavioral & Mental Health AI,Disclosure Requirement,Enacted; mental-he
 VT,H776,Utilization Review & Prior Auth,Outright Ban,Health-plan AI UR must base on clinical history; limits sole reliance
 VT,H814,Clinical Decision Making,Privacy Safeguard,Enacted; Act 101 neurological rights; mental/neural data privacy
 WA,SB5395,Utilization Review & Prior Auth,Outright Ban,Enacted; AI not sole means to deny/delay/modify; licensed-provider review
+CO,HB1195,Behavioral & Mental Health AI,Outright Ban,Source2; prohibits AI therapy chatbots; limits licensed-provider AI use
+ME,LD2082,Behavioral & Mental Health AI,Outright Ban,Source2; bars AI therapy/psychotherapy without a licensed professional
+RI,S2197,Behavioral & Mental Health AI,Outright Ban,Source2; Oversight of AI in Mental Health Care Act; no independent AI therapy
+RI,H7349,Behavioral & Mental Health AI,Outright Ban,Source2; companion to S2197
+TN,SB1580,Behavioral & Mental Health AI,Representation Restriction,Source2; bars AI representing itself as a qualified mental health professional
+VT,H816,Behavioral & Mental Health AI,Outright Ban,Source2; therapy chatbot ban; services must be delivered by professionals
+LA,HB475,Provider Disclosure,Disclosure Requirement,Source2; verbal disclosure before AI transcription of appointments
+UT,SB319,Utilization Review & Prior Auth,Disclosure Requirement,Source2; insurer must disclose AI in preauth; independent medical judgment on adverse
+UT,SB150,Clinical AI Oversight (Professional Bodies),Minor Safeguard,Source2; scope-of-practice limit on AI advising/treating without practitioner interaction
+IL,SB3114,Clinical Decision Making,Outright Ban,Source2; downcoding determinations must be made/reviewed by a natural person

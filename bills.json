@@ -1,8 +1,9 @@
 {
   "schema_version": "2.0-archive",
-  "generated_at": "2026-11-02T19:33:34.343080+00:00",
+  "generated_at": "2026-11-09T17:54:42.795340+00:00",
   "sources": [
-    "ailawsbystate"
+    "ailawsbystate",
+    "transparencycoalition"
   ],
   "status_buckets": [
     "Effective",
@@ -22,13 +23,13 @@
     "Clinical AI Oversight (Professional Bodies)"
   ],
   "counts": {
-    "total": 111,
+    "total": 121,
     "by_bucket": {
-      "Effective": 19,
-      "Enacted": 6,
+      "Effective": 25,
+      "Enacted": 9,
       "Passed": 2,
       "In Committee": 21,
-      "Introduced": 8,
+      "Introduced": 9,
       "Dead": 55
     }
   },
@@ -74,13 +75,13 @@
       "stringency": 4.0
     },
     "CO": {
-      "Effective": 1,
+      "Effective": 2,
       "Enacted": 2,
       "Passed": 0,
       "In Committee": 0,
       "Introduced": 0,
       "Dead": 0,
-      "total": 3,
+      "total": 4,
       "stringency": 4.0
     },
     "CT": {
@@ -118,9 +119,9 @@
       "Enacted": 0,
       "Passed": 0,
       "In Committee": 2,
-      "Introduced": 0,
+      "Introduced": 1,
       "Dead": 2,
-      "total": 6,
+      "total": 7,
       "stringency": 4.0
     },
     "IN": {
@@ -164,24 +165,24 @@
       "stringency": 0.0
     },
     "LA": {
-      "Effective": 0,
+      "Effective": 1,
       "Enacted": 0,
       "Passed": 0,
       "In Committee": 0,
       "Introduced": 0,
       "Dead": 2,
-      "total": 2,
-      "stringency": 0.0
+      "total": 3,
+      "stringency": 2.0
     },
     "ME": {
-      "Effective": 0,
+      "Effective": 1,
       "Enacted": 0,
       "Passed": 0,
       "In Committee": 0,
       "Introduced": 0,
       "Dead": 1,
-      "total": 1,
-      "stringency": 0.0
+      "total": 2,
+      "stringency": 4.0
     },
     "MD": {
       "Effective": 1,
@@ -345,13 +346,13 @@
     },
     "RI": {
       "Effective": 2,
-      "Enacted": 0,
+      "Enacted": 2,
       "Passed": 1,
       "In Committee": 0,
       "Introduced": 1,
       "Dead": 1,
-      "total": 5,
-      "stringency": 2.0
+      "total": 7,
+      "stringency": 4.0
     },
     "SC": {
       "Effective": 0,
@@ -374,14 +375,14 @@
       "stringency": 0.0
     },
     "TN": {
-      "Effective": 0,
+      "Effective": 1,
       "Enacted": 0,
       "Passed": 0,
       "In Committee": 0,
       "Introduced": 0,
       "Dead": 4,
-      "total": 4,
-      "stringency": 0.0
+      "total": 5,
+      "stringency": 3.0
     },
     "TX": {
       "Effective": 3,
@@ -404,24 +405,24 @@
       "stringency": 0.0
     },
     "UT": {
-      "Effective": 1,
-      "Enacted": 0,
+      "Effective": 2,
+      "Enacted": 1,
       "Passed": 0,
       "In Committee": 0,
       "Introduced": 0,
       "Dead": 0,
-      "total": 1,
-      "stringency": 2.0
+      "total": 3,
+      "stringency": 3.0
     },
     "VT": {
-      "Effective": 1,
+      "Effective": 2,
       "Enacted": 0,
       "Passed": 0,
       "In Committee": 0,
       "Introduced": 0,
       "Dead": 1,
-      "total": 2,
-      "stringency": 2.0
+      "total": 3,
+      "stringency": 4.0
     },
     "WA": {
       "Effective": 1,
@@ -689,6 +690,22 @@
       "desc": "Colorado's HB 26-1139 regulates AI in utilization review. Insurers, PBMs, utilization review organizations, behavioral health administrative services organizations and managed care entities that use it must ensure the AI relies on the individual's clinical information, not solely group data, does not unlawfully discriminate, keeps audit logs and is periodically reviewed, and must disclose their AI use and human oversight to regulators. A medical-necessity denial may not rest solely on AI output without a competent clinician's review and approval. Health plans, Medicaid and CHP+ may not pay for psychotherapy conducted by AI. Signed June 2, 2026 (Chapter 325); effective January 1, 2027.",
       "source": "https://leg.colorado.gov/bills/hb26-1139",
       "caveat": "AI-assisted summary (ailawsbystate); official text controls",
+      "score": 4.0
+    },
+    {
+      "state": "CO",
+      "bill": "HB1195",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Effective",
+      "effective": "2026-08-12",
+      "timeline_date": "2026-08-12",
+      "domains": [
+        "Behavioral & Mental Health AI"
+      ],
+      "desc": "Prohibits AI therapy chatbots; limits AI use by licensed psychotherapy providers.",
+      "source": "https://legiscan.com/CO/bill/HB1195/2026",
+      "caveat": "",
       "score": 4.0
     },
     {
@@ -1077,6 +1094,22 @@
     },
     {
       "state": "IL",
+      "bill": "SB3114",
+      "title": "",
+      "status": "Unknown",
+      "bucket": "Introduced",
+      "effective": "",
+      "timeline_date": "",
+      "domains": [
+        "Clinical Decision Making"
+      ],
+      "desc": "Prohibits payor from using automated process to downcode a claim bypassing billing info; downcoding must be made or reviewed by a natural person.",
+      "source": "https://legiscan.com/IL/bill/SB3114/2025",
+      "caveat": "",
+      "score": 0.8
+    },
+    {
+      "state": "IL",
       "bill": "SB3702",
       "title": "REGISTERED NURSE USE OF AI",
       "status": "In Committee",
@@ -1170,6 +1203,22 @@
       "source": "https://apps.legislature.ky.gov/record/26RS/hb641.html",
       "caveat": "AI-assisted summary (ailawsbystate); official text controls",
       "score": 0.15
+    },
+    {
+      "state": "LA",
+      "bill": "HB475",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Effective",
+      "effective": "2026-08-01",
+      "timeline_date": "2026-08-01",
+      "domains": [
+        "Provider Disclosure"
+      ],
+      "desc": "Licensed professionals must verbally disclose use of recording/transcription software before recording an appointment for AI transcription.",
+      "source": "https://legiscan.com/LA/bill/HB475/2026",
+      "caveat": "",
+      "score": 2.0
     },
     {
       "state": "LA",
@@ -1314,6 +1363,22 @@
       "source": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=1301&snum=132",
       "caveat": "AI-assisted summary (ailawsbystate); official text controls",
       "score": 0.2
+    },
+    {
+      "state": "ME",
+      "bill": "LD2082",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Effective",
+      "effective": "2026-07-29",
+      "timeline_date": "2026-07-29",
+      "domains": [
+        "Behavioral & Mental Health AI"
+      ],
+      "desc": "Prohibits AI therapy/psychotherapy without a licensed professional; unfair trade practice.",
+      "source": "https://legiscan.com/ME/bill/LD2082/2025",
+      "caveat": "",
+      "score": 4.0
     },
     {
       "state": "MI",
@@ -1797,6 +1862,22 @@
     },
     {
       "state": "RI",
+      "bill": "H7349",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Enacted",
+      "effective": "2027-01-01",
+      "timeline_date": "2027-01-01",
+      "domains": [
+        "Behavioral & Mental Health AI"
+      ],
+      "desc": "Companion Act to S2197; Oversight of AI in Mental Health Care Act.",
+      "source": "https://legiscan.com/RI/bill/H7349/2026",
+      "caveat": "",
+      "score": 4.0
+    },
+    {
+      "state": "RI",
       "bill": "H7538",
       "title": "Requires healthcare providers and healthcare facilities to inform patients of the use of artificial intelligence to memorialize patient visits.",
       "status": "Enacted",
@@ -1826,6 +1907,22 @@
       "source": "https://webserver.rilegislature.gov/BillText24/HouseText24/H8073.pdf",
       "caveat": "AI-assisted summary (ailawsbystate); official text controls",
       "score": 0.1
+    },
+    {
+      "state": "RI",
+      "bill": "S2197",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Enacted",
+      "effective": "2027-01-01",
+      "timeline_date": "2027-01-01",
+      "domains": [
+        "Behavioral & Mental Health AI"
+      ],
+      "desc": "Oversight of AI in Mental Health Care Act; bars offering therapy via AI unless licensed provider; no independent AI therapeutic decisions.",
+      "source": "https://legiscan.com/RI/bill/S2197/2026",
+      "caveat": "",
+      "score": 4.0
     },
     {
       "state": "RI",
@@ -1954,6 +2051,22 @@
       "source": "https://wapp.capitol.tn.gov/apps/BillInfo/Default?BillNumber=SB1261&ga=114",
       "caveat": "AI-assisted summary (ailawsbystate); official text controls",
       "score": 0.2
+    },
+    {
+      "state": "TN",
+      "bill": "SB1580",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Effective",
+      "effective": "2026-07-01",
+      "timeline_date": "2026-07-01",
+      "domains": [
+        "Behavioral & Mental Health AI"
+      ],
+      "desc": "Prohibits deploying an AI system that represents it can act as a qualified mental health professional.",
+      "source": "https://legiscan.com/TN/bill/SB1580/2025",
+      "caveat": "",
+      "score": 3.0
     },
     {
       "state": "TN",
@@ -2164,6 +2277,38 @@
       "score": 2.0
     },
     {
+      "state": "UT",
+      "bill": "SB150",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Effective",
+      "effective": "2026-03-24",
+      "timeline_date": "2026-03-24",
+      "domains": [
+        "Clinical AI Oversight (Professional Bodies)"
+      ],
+      "desc": "Scope-of-practice limit; AI that solely advises/treats without practitioner-patient interaction is not a qualifying technology innovation.",
+      "source": "https://legiscan.com/UT/bill/SB0150/2026",
+      "caveat": "",
+      "score": 3.0
+    },
+    {
+      "state": "UT",
+      "bill": "SB319",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Enacted",
+      "effective": "2027-01-01",
+      "timeline_date": "2027-01-01",
+      "domains": [
+        "Utilization Review & Prior Auth"
+      ],
+      "desc": "Insurers must disclose AI use in preauthorization; adverse determination reviewer must use independent medical judgment.",
+      "source": "https://legiscan.com/UT/drafts/SB0319/2026",
+      "caveat": "",
+      "score": 2.0
+    },
+    {
       "state": "VT",
       "bill": "H776",
       "title": "An act relating to the use of artificial intelligence in health care coverage decisions",
@@ -2194,6 +2339,22 @@
       "source": "https://legislature.vermont.gov/bill/status/2026/H.814",
       "caveat": "AI-assisted summary (ailawsbystate); official text controls",
       "score": 2.0
+    },
+    {
+      "state": "VT",
+      "bill": "H816",
+      "title": "",
+      "status": "Enacted",
+      "bucket": "Effective",
+      "effective": "2026-06-17",
+      "timeline_date": "2026-06-17",
+      "domains": [
+        "Behavioral & Mental Health AI"
+      ],
+      "desc": "Therapy chatbot ban; mental health services must be delivered by professionals not independently by AI.",
+      "source": "https://legiscan.com/VT/bill/H0816/2025",
+      "caveat": "",
+      "score": 4.0
     },
     {
       "state": "WA",
