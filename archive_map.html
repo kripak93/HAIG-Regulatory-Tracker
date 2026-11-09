@@ -9,8 +9,9 @@
   :root{
     --paper:#f6f4ee; --paper-2:#efece2; --ink:#141b2e; --ink-soft:#3c4560;
     --muted:#707a94; --line:#d8d4c4; --accent:#b5502e;
-    --c-effective:#161f47; --c-enacted:#3f6d95; --c-passed:#7fa8a3;
-    --c-committee:#c6b784; --c-introduced:#dcd6c2; --c-dead:#c2796b; --c-none:#e9e6d8;
+    /* Live law keeps color; everything not-live is a grey ramp (dead = near-black) */
+    --c-effective:#1d4d3a; --c-enacted:#3f6d95; --c-passed:#9aa0a8;
+    --c-committee:#7d828b; --c-introduced:#b4b8be; --c-dead:#2b2f36; --c-none:#e9e6d8;
     --s0:#e9e6d8; --s1:#bcd0c9; --s2:#7fa8a3; --s3:#3f6d95; --s4:#161f47;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -62,7 +63,7 @@
   <div class="masthead">
     <div class="eyebrow">AI Regulatory Tracker · Exhaustive Archive</div>
     <h1>Healthcare AI Legislation by State</h1>
-    <p class="subhead">Every bill from every source, every status — enacted, pending, and dead. Filter by lifecycle status and category; the map recolors by status or 0–4 stringency. Dead/failed bills are kept and labeled, never dropped.</p>
+    <p class="subhead">Every bill from every source, every status. Live law (effective / enacted) is shown in color; not-yet-live and dead bills recede to grey, with dead near-black. Filter by status and category, or recolor by 0–4 stringency. Dead/failed bills are kept and labeled, never dropped.</p>
   </div>
 
   <div class="controls">
@@ -114,7 +115,8 @@
 const FIPS_TO_USPS = {"01":"AL","02":"AK","04":"AZ","05":"AR","06":"CA","08":"CO","09":"CT","10":"DE","11":"DC","12":"FL","13":"GA","15":"HI","16":"ID","17":"IL","18":"IN","19":"IA","20":"KS","21":"KY","22":"LA","23":"ME","24":"MD","25":"MA","26":"MI","27":"MN","28":"MS","29":"MO","30":"MT","31":"NE","32":"NV","33":"NH","34":"NJ","35":"NM","36":"NY","37":"NC","38":"ND","39":"OH","40":"OK","41":"OR","42":"PA","44":"RI","45":"SC","46":"SD","47":"TN","48":"TX","49":"UT","50":"VT","51":"VA","53":"WA","54":"WV","55":"WI","56":"WY"};
 const NAMES = {AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",DC:"D.C.",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming",US:"Federal"};
 const BUCKET_COLOR = {"Effective":"var(--c-effective)","Enacted":"var(--c-enacted)","Passed":"var(--c-passed)","In Committee":"var(--c-committee)","Introduced":"var(--c-introduced)","Dead":"var(--c-dead)"};
-const DARK_BUCKETS = new Set(["Effective","Enacted","Dead"]);
+// buckets dark enough to need white text
+const DARK_BUCKETS = new Set(["Effective","Enacted","Dead","Passed","In Committee"]);
 const ORDER=["Dead","Introduced","In Committee","Passed","Enacted","Effective"];
 const STRINGENCY_BANDS=[["None","var(--s0)"],["Non-binding / early","var(--s1)"],["Disclosure","var(--s2)"],["Restricted","var(--s3)"],["Prohibited","var(--s4)"]];
 
