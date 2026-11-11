@@ -1,0 +1,41 @@
+company,primary_stakeholder,primary_stage,patient_facing,patient_stage,payer_stage,notes
+OpenEvidence,Provider,Clinical Decision,no,,,Clinician evidence engine; patients never use it
+HeartFlow,Provider,Diagnose,no,,,Cardiac CT analysis read by clinicians
+Abridge,Provider,Document,no,,,Ambient scribe for clinicians
+Commure,Provider,Bill & Collect,no,,,RCM/ambient/ops platform sold to health systems; not patient-facing
+Innovaccer,Provider,Infrastructure,no,,Risk & Quality,Data platform; payer workflows secondary
+Lumeris,Provider,Infrastructure,no,,Risk & Quality,VBC enablement; payer-adjacent secondary
+Truveta,Provider,Infrastructure,no,,,Health-system data network; research buyers
+Aidoc,Provider,Diagnose,no,,,Imaging triage read by radiologists
+Biofourmis,Provider,Ongoing Care,yes,Live With Condition,,Hospital-at-home; patient uses RPM app
+Hippocratic AI,Provider,Access & Intake,yes,Find & Book Care,,Patient-facing agents but health systems are the buyer/funding bet
+K Health,Patient,Find & Book Care,yes,Find & Book Care,,Consumer virtual primary care; genuinely patient-first
+EliseAI,Provider,Access & Intake,no,,,Front-office voice agents bought by practices (also non-healthcare)
+Ambience Healthcare,Provider,Document,no,,,Ambient scribe + coding for clinicians
+Cleerly,Provider,Diagnose,no,,,Coronary CT analysis for clinicians
+Cedar,Provider,Bill & Collect,yes,Understand the Bill,,Patient billing/payments; patient interacts with bills
+Exo,Provider,Diagnose,no,,,Handheld ultrasound used by clinicians
+Dental Monitoring,Provider,Diagnose,yes,Live With Condition,,Patient does smartphone scans at home
+Forus (formerly Tandem),Provider,Bill & Collect,no,,Prior Authorization,Medication-access/prior-auth; provider-attributed
+AMBOSS,Provider,Clinical Decision,no,,,Clinician knowledge/reference; large student/clinician base
+Viz.ai,Provider,Diagnose,no,,,Stroke imaging triage + care coordination for clinicians
+Paradigm Health,Provider,Infrastructure,no,,,Clinical trials infrastructure
+PathAI,Provider,Diagnose,no,,,Digital pathology for labs + pharma
+LeanTaaS,Provider,Operations,no,,,Capacity/OR optimization software
+Cadence,Provider,Ongoing Care,yes,Live With Condition,,RPM/chronic care; patient uses devices
+Harrison.ai,Provider,Diagnose,no,,,Radiology + pathology detection for clinicians
+Glooko,Provider,Clinical Decision,yes,Live With Condition,,Diabetes data platform; patient app component
+Inspiren,Provider,Ongoing Care,no,,,Senior-living computer-vision monitoring; staff-facing
+TytoCare,Provider,Ongoing Care,yes,Live With Condition,,Home remote-exam device used by patients
+Assort Health,Provider,Access & Intake,no,,,Voice scheduling agents for practices
+Caresyntax,Provider,Treat,no,,,Surgical data/analytics platform
+Paige,Provider,Diagnose,no,,,Digital pathology for labs + pharma
+Candid Health,Provider,Bill & Collect,no,,Utilization & Claims,Autonomous RCM for provider groups
+AKASA,Provider,Bill & Collect,no,,Prior Authorization,GenAI RCM for health systems
+Heidi Health,Provider,Document,no,,,Ambient scribe for clinicians
+Qventus,Provider,Operations,no,,,Hospital ops/capacity automation
+Qualified Health,Provider,Infrastructure,no,,,Enterprise GenAI governance platform
+Suki,Provider,Document,no,,,Voice AI scribe for clinicians
+Tennr,Provider,Access & Intake,no,,,Referral intake automation for practices
+Luma Health,Provider,Access & Intake,yes,Find & Book Care,,Patient scheduling/outreach; patient interacts
+Tandem Health,Provider,Document,no,,,Ambient scribe for clinicians

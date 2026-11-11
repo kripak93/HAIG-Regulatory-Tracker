@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare AI Market Map</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  :root{
+    --paper:#f6f4ee; --paper-2:#efece2; --ink:#141b2e; --ink-soft:#3c4560;
+    --muted:#707a94; --line:#d8d4c4; --accent:#b5502e;
+    /* segment colors */
+    --seg-clinical:#3f6d95; --seg-access:#1d7a6b; --seg-rev:#b5802e;
+    --seg-data:#7a5ca8; --seg-ops:#c2796b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;}
+  body{padding:28px 20px 60px;}
+  .wrap{max-width:1120px;margin:0 auto;}
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:20px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+  h1{font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.15rem);line-height:1.12;}
+  .subhead{font-size:.85rem;color:var(--muted);max-width:70ch;margin-top:8px;line-height:1.55;}
+  .controls{display:flex;flex-wrap:wrap;gap:16px;margin:16px 0;align-items:flex-end;}
+  .ctrl{display:flex;flex-direction:column;gap:4px;}
+  .ctrl label{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .ctrl select,.ctrl input{font-family:'Inter',sans-serif;font-size:.85rem;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 12px;}
+  .seg-toggle{display:flex;gap:0;border:1px solid var(--line);border-radius:7px;overflow:hidden;}
+  .seg-toggle button{font-family:'Inter';font-size:.8rem;font-weight:600;padding:8px 14px;border:none;background:#fff;color:var(--ink-soft);cursor:pointer;}
+  .seg-toggle button.on{background:var(--ink);color:var(--paper);}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);margin-bottom:8px;}
+  .legend .sw{display:inline-flex;align-items:center;gap:5px;}
+  .legend .dot{width:12px;height:12px;border-radius:50%;}
+  .chartwrap{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 14px 6px;}
+  svg{width:100%;height:auto;display:block;overflow:visible;}
+  .axis line,.axis path{stroke:var(--line);}
+  .axis text{fill:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:10px;}
+  .axis-label{fill:var(--ink-soft);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;}
+  .bubble{cursor:pointer;fill-opacity:.72;stroke:#fff;stroke-width:1.2;transition:fill-opacity .12s;}
+  .bubble:hover{fill-opacity:.95;}
+  .bubble.sel{stroke:var(--ink);stroke-width:2.5;}
+  .blabel{font-family:'Inter';font-size:9.5px;font-weight:600;fill:var(--ink);pointer-events:none;text-anchor:middle;}
+  .tooltip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.72rem;padding:7px 10px;border-radius:6px;opacity:0;transition:opacity .1s;z-index:5;font-family:'IBM Plex Mono',monospace;line-height:1.5;white-space:nowrap;}
+  .quad-note{font-family:'IBM Plex Mono',monospace;font-size:9px;fill:var(--muted);opacity:.6;}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:16px;}
+  .panel h3{font-family:'Source Serif 4',Georgia,serif;font-size:1.1rem;margin-bottom:2px;}
+  .panel .sub{color:var(--muted);font-size:.78rem;margin-bottom:10px;}
+  .themes{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px;}
+  .theme{font-family:'IBM Plex Mono',monospace;font-size:.66rem;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:3px 9px;color:var(--ink-soft);}
+  table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:12px;}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;}
+  td.num{text-align:right;font-family:'IBM Plex Mono',monospace;}
+  .pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.58rem;padding:2px 7px;border-radius:10px;border:1px solid rgba(0,0,0,.12);white-space:nowrap;}
+  .foot{font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--muted);text-align:center;margin-top:24px;}
+  .tally{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-left:auto;align-self:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">Healthcare AI · Market Map</div>
+    <h1>Where the Healthcare-AI Market Is Happening</h1>
+    <p class="subhead">948 companies by workflow function. Each bubble is a category: horizontal = capital raised, vertical = 2026 funding momentum, size = number of companies. Top-right is hot and crowded; bottom-left is white space. Click a bubble to drill into the companies and product themes within it.</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl">
+      <label>View level</label>
+      <div class="seg-toggle" id="levelToggle">
+        <button data-level="category" class="on">By category (18)</button>
+        <button data-level="segment">By segment (5)</button>
+      </div>
+    </div>
+    <div class="ctrl">
+      <label for="yAxis">Vertical axis</label>
+      <select id="yAxis">
+        <option value="momentum">2026 momentum (# raised)</option>
+        <option value="avground">Avg round size ($M)</option>
+        <option value="pctearly">% early-stage</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <label for="search">Search companies</label>
+      <input id="search" type="text" placeholder="name, use case, investor…">
+    </div>
+    <div class="tally" id="tally"></div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+  <div class="chartwrap">
+    <svg id="chart" viewBox="0 0 960 520" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="tooltip" id="tt"></div>
+  </div>
+
+  <div class="panel" id="panel"><span class="sub">Click a bubble to see the companies and themes within that function. Or search above.</span></div>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+const SEG_COLOR = {
+  "Clinical AI":"var(--seg-clinical)","Access & Care":"var(--seg-access)",
+  "Revenue & Coding":"var(--seg-rev)","Data & Infrastructure":"var(--seg-data)",
+  "Operations & Workforce":"var(--seg-ops)"
+};
+const SEG_HEX = {
+  "Clinical AI":"#3f6d95","Access & Care":"#1d7a6b","Revenue & Coding":"#b5802e",
+  "Data & Infrastructure":"#7a5ca8","Operations & Workforce":"#c2796b"
+};
+let DATA=null, LEVEL='category', SELECTED=null;
+const W=960,H=520, M={t:24,r:40,b:54,l:64};
+const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+fetch('market.json').then(r=>r.json()).then(d=>{DATA=d;init();})
+ .catch(e=>{document.getElementById('panel').innerHTML='<span class="sub">Could not load market.json — run <code>python build_market.py</code> and serve over http. '+e+'</span>';});
+
+function init(){
+  buildLegend();
+  document.querySelectorAll('#levelToggle button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#levelToggle button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); LEVEL=b.dataset.level; SELECTED=null; render(); clearPanel();
+  }));
+  document.getElementById('yAxis').addEventListener('change',render);
+  document.getElementById('search').addEventListener('input',onSearch);
+  render();
+  document.getElementById('foot').textContent='Source: '+DATA.generated_from+' · '+DATA.total_companies+' companies · bubble size = company count';
+}
+
+function buildLegend(){
+  const el=document.getElementById('legend');
+  el.innerHTML='<span>Segment:</span>';
+  Object.entries(SEG_HEX).forEach(([s,c])=>{
+    const sp=document.createElement('span');sp.className='sw';
+    sp.innerHTML='<span class="dot" style="background:'+c+'"></span>'+s;el.appendChild(sp);
+  });
+}
+
+function nodes(){
+  if(LEVEL==='segment'){
+    return DATA.segments.map(s=>({
+      key:s.segment, segment:s.segment, companies:s.companies,
+      raised:s.raised, r26:s.raised2026, pctEarly:0, avgRound:0
+    }));
+  }
+  return DATA.categories.map(c=>{
+    const comps=DATA.companies.filter(x=>x.category===c.category);
+    const early=comps.filter(x=>x.stage==='Early (Pre-seed–A)').length;
+    const rounds=comps.map(x=>x.latestRound).filter(v=>v>0);
+    const avg=rounds.length?rounds.reduce((a,b)=>a+b,0)/rounds.length:0;
+    return {key:c.category, segment:c.segment, companies:c.companies,
+      raised:c.raised, r26:c.raised2026, pctEarly:c.companies?early/c.companies*100:0, avgRound:avg};
+  });
+}
+
+function yVal(n){
+  const m=document.getElementById('yAxis').value;
+  if(m==='avground')return n.avgRound;
+  if(m==='pctearly')return n.pctEarly;
+  return n.r26;
+}
+function yLabel(){
+  const m=document.getElementById('yAxis').value;
+  return m==='avground'?'Avg round size ($M) →':m==='pctearly'?'% early-stage →':'2026 momentum (# companies raised) →';
+}
+
+function render(){
+  const svg=d3.select('#chart'); svg.selectAll('*').remove();
+  const data=nodes();
+  const x=d3.scaleSqrt().domain([0,d3.max(data,d=>d.raised)*1.08]).range([M.l,W-M.r]);
+  const y=d3.scaleLinear().domain([0,d3.max(data,d=>yVal(d))*1.15||1]).range([H-M.b,M.t]);
+  const r=d3.scaleSqrt().domain([0,d3.max(data,d=>d.companies)]).range([6,54]);
+
+  // quadrant guide lines (median)
+  const mx=d3.median(data,d=>d.raised), my=d3.median(data,d=>yVal(d));
+  svg.append('line').attr('x1',x(mx)).attr('x2',x(mx)).attr('y1',M.t).attr('y2',H-M.b).attr('stroke','var(--line)').attr('stroke-dasharray','3 4');
+  svg.append('line').attr('x1',M.l).attr('x2',W-M.r).attr('y1',y(my)).attr('y2',y(my)).attr('stroke','var(--line)').attr('stroke-dasharray','3 4');
+  svg.append('text').attr('class','quad-note').attr('x',W-M.r-4).attr('y',M.t+12).attr('text-anchor','end').text('hot + crowded');
+  svg.append('text').attr('class','quad-note').attr('x',M.l+4).attr('y',H-M.b-6).text('white space');
+
+  // axes
+  const xAxis=d3.axisBottom(x).ticks(6).tickFormat(d=>'$'+d3.format('~s')(d));
+  const yAxis=d3.axisLeft(y).ticks(6);
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${H-M.b})`).call(xAxis);
+  svg.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(yAxis);
+  svg.append('text').attr('class','axis-label').attr('x',(W-M.r+M.l)/2).attr('y',H-14).attr('text-anchor','middle').text('Total capital raised ($M) →');
+  svg.append('text').attr('class','axis-label').attr('transform','rotate(-90)').attr('x',-(H-M.b+M.t)/2).attr('y',16).attr('text-anchor','middle').text(yLabel());
+
+  const tt=document.getElementById('tt');
+  const g=svg.selectAll('g.node').data(data).enter().append('g').attr('class','node');
+  g.append('circle').attr('class',d=>'bubble'+(SELECTED===d.key?' sel':''))
+    .attr('cx',d=>x(d.raised)).attr('cy',d=>yVal(d)!==undefined?y(yVal(d)):0).attr('r',d=>r(d.companies))
+    .attr('fill',d=>SEG_HEX[d.segment]||'#999')
+    .on('mousemove',function(ev,d){
+      tt.innerHTML='<b>'+esc(d.key)+'</b><br>'+d.companies+' companies · $'+Math.round(d.raised)+'M raised<br>'+d.r26+' raised in 2026';
+      const rect=document.querySelector('.chartwrap').getBoundingClientRect();
+      tt.style.left=(ev.clientX-rect.left+12)+'px';tt.style.top=(ev.clientY-rect.top+12)+'px';tt.style.opacity=1;
+    })
+    .on('mouseleave',()=>tt.style.opacity=0)
+    .on('click',(ev,d)=>{SELECTED=d.key;render();showDetail(d.key);});
+  // labels on larger bubbles
+  g.append('text').attr('class','blabel').attr('x',d=>x(d.raised)).attr('y',d=>y(yVal(d))+3)
+    .text(d=>r(d.companies)>22?shortLabel(d.key):'');
+
+  document.getElementById('tally').textContent=data.length+(LEVEL==='segment'?' segments':' categories')+' · '+DATA.total_companies+' companies';
+}
+function shortLabel(s){return s.replace(' & ',' & ').split(' ').slice(0,2).join(' ');}
+
+function clearPanel(){document.getElementById('panel').innerHTML='<span class="sub">Click a bubble to see the companies and themes within that function.</span>';}
+
+let SUBSEL=null;
+function showDetail(key){ SUBSEL=null; renderDetail(key); }
+
+function renderDetail(key){
+  const inSeg = LEVEL==='segment';
+  let comps=DATA.companies.filter(c=> inSeg ? c.segment===key : c.category===key);
+  const catMeta = DATA.categories.find(c=>c.category===key);
+
+  // "what they do" sub-groups (category level only)
+  let subHtml='';
+  if(!inSeg && catMeta && catMeta.subgroups && catMeta.subgroups.length){
+    const mx=Math.max(...catMeta.subgroups.map(s=>s.raised),1);
+    subHtml='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:.62rem;color:var(--muted);margin:2px 0 6px">WHAT THEY DO (click to filter · sized by capital)</div>'+
+      '<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px">'+
+      catMeta.subgroups.map(s=>{
+        const w=Math.max(s.raised/mx*100,3);const on=SUBSEL===s.name;
+        return '<div class="subrow" data-sub="'+encodeURIComponent(s.name)+'" style="display:flex;align-items:center;gap:10px;cursor:pointer">'+
+          '<span style="width:210px;flex-shrink:0;font-size:.76rem;font-weight:'+(on?'700':'500')+';color:'+(on?'var(--accent)':'var(--ink)')+'">'+esc(s.name)+'</span>'+
+          '<div style="height:18px;width:'+w+'%;min-width:3px;background:'+(on?'var(--accent)':(SEG_HEX[catMeta.segment]||'#999'))+';border-radius:4px;opacity:'+(on?'1':'.8')+'"></div>'+
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:.66rem;color:var(--muted);white-space:nowrap">'+s.companies+' cos · $'+Math.round(s.raised)+'M · '+s.raised2026+' in 2026</span>'+
+          '</div>';
+      }).join('')+'</div>';
+  }
+  if(SUBSEL){ comps=comps.filter(c=>(c.subgroup||'Other')===SUBSEL); }
+  comps=comps.sort((a,b)=>b.totalRaised-a.totalRaised);
+  const raised=comps.reduce((a,b)=>a+b.totalRaised,0);
+  const r26=comps.filter(c=>c.raised2026).length;
+
+  let themesHtml='';
+  if(!inSeg && catMeta && !SUBSEL){
+    themesHtml='<div class="themes">'+catMeta.topThemes.map(t=>'<span class="theme">'+esc(t[0])+' · '+t[1]+'</span>').join('')+'</div>';
+  }
+  const rows=comps.slice(0,80).map(c=>
+    '<tr>'+
+    '<td><strong>'+esc(c.name)+'</strong></td>'+
+    '<td><span class="pill" style="background:'+(SEG_HEX[c.segment]||'#999')+'22">'+esc(c.stage||'—')+'</span></td>'+
+    '<td class="num">'+(c.totalRaised?('$'+Math.round(c.totalRaised)+'M'):'—')+'</td>'+
+    '<td class="num">'+(c.raised2026?'●':'')+'</td>'+
+    '<td>'+esc(c.hq||c.country||'—')+'</td>'+
+    '<td>'+esc((c.useCases||[]).slice(0,3).join(', '))+'</td>'+
+    '</tr>').join('');
+  const p=document.getElementById('panel');
+  const crumb = SUBSEL ? (' › <span style="color:var(--accent)">'+esc(SUBSEL)+'</span> <a href="#" id="clearSub" style="font-size:.7rem;color:var(--muted)">(clear)</a>') : '';
+  p.innerHTML='<h3>'+esc(key)+crumb+'</h3>'+
+    '<div class="sub">'+comps.length+' companies · $'+Math.round(raised)+'M total raised · '+r26+' raised in 2026'+(comps.length>80?' · showing top 80 by funding':'')+'</div>'+
+    subHtml+
+    themesHtml+
+    '<table><thead><tr><th>Company</th><th>Stage</th><th>Raised</th><th>2026</th><th>HQ</th><th>Use cases</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  document.querySelectorAll('.subrow').forEach(el=>el.addEventListener('click',()=>{
+    const s=decodeURIComponent(el.dataset.sub); SUBSEL=(SUBSEL===s)?null:s; renderDetail(key);
+  }));
+  const cs=document.getElementById('clearSub');
+  if(cs)cs.addEventListener('click',e=>{e.preventDefault();SUBSEL=null;renderDetail(key);});
+}
+
+function onSearch(){
+  const q=this.value.trim().toLowerCase();
+  if(!q){clearPanel();return;}
+  const hits=DATA.companies.filter(c=>{
+    const hay=(c.name+' '+c.category+' '+c.desc+' '+(c.useCases||[]).join(' ')+' '+(c.keyInvestors||[]).join(' ')).toLowerCase();
+    return hay.includes(q);
+  }).sort((a,b)=>b.totalRaised-a.totalRaised);
+  const rows=hits.slice(0,80).map(c=>
+    '<tr><td><strong>'+esc(c.name)+'</strong></td>'+
+    '<td>'+esc(c.category)+'</td>'+
+    '<td><span class="pill">'+esc(c.stage||'—')+'</span></td>'+
+    '<td class="num">'+(c.totalRaised?('$'+Math.round(c.totalRaised)+'M'):'—')+'</td>'+
+    '<td>'+esc(c.hq||c.country||'—')+'</td>'+
+    '<td>'+esc((c.useCases||[]).slice(0,3).join(', '))+'</td></tr>').join('');
+  document.getElementById('panel').innerHTML='<h3>Search: "'+esc(q)+'"</h3><div class="sub">'+hits.length+' matches'+(hits.length>80?' · showing top 80':'')+'</div>'+
+    '<table><thead><tr><th>Company</th><th>Category</th><th>Stage</th><th>Raised</th><th>HQ</th><th>Use cases</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+</script>
+</body>
+</html>

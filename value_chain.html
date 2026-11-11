@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare AI Value Chain</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  :root{
+    --paper:#f6f4ee; --paper-2:#efece2; --ink:#141b2e; --ink-soft:#3c4560;
+    --muted:#707a94; --line:#d8d4c4; --accent:#b5502e;
+    --prov:#3f6d95; --pat:#1d7a6b; --pay:#b5802e; --pharma:#7a5ca8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;}
+  body{padding:28px 20px 60px;}
+  .wrap{max-width:1120px;margin:0 auto;}
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:18px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+  h1{font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.15rem);line-height:1.12;}
+  .subhead{font-size:.85rem;color:var(--muted);max-width:72ch;margin-top:8px;line-height:1.55;}
+  .tabs{display:flex;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:18px 0 6px;width:fit-content;}
+  .tabs button{font-family:'Inter';font-size:.82rem;font-weight:600;padding:9px 16px;border:none;background:#fff;color:var(--ink-soft);cursor:pointer;border-right:1px solid var(--line);}
+  .tabs button:last-child{border-right:none;}
+  .tabs button.on{background:var(--ink);color:var(--paper);}
+  .metric-toggle{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted);margin:10px 0;}
+  .metric-toggle label{cursor:pointer;margin-right:14px;}
+  /* overview */
+  .ov-wrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;}
+  .ov-title{font-family:'Source Serif 4',Georgia,serif;font-size:1.1rem;margin-bottom:4px;}
+  .ov-sub{font-size:.82rem;color:var(--muted);margin-bottom:18px;max-width:68ch;line-height:1.5;}
+  .nested{display:flex;flex-direction:column;gap:10px;}
+  .nest-row{display:flex;align-items:center;gap:12px;}
+  .nest-bar{height:34px;border-radius:6px;display:flex;align-items:center;padding:0 12px;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.76rem;font-weight:500;white-space:nowrap;min-width:60px;}
+  .nest-label{font-size:.8rem;font-weight:600;width:90px;flex-shrink:0;}
+  .ov-finding{margin-top:18px;padding:12px 14px;background:var(--paper-2);border-left:3px solid var(--accent);border-radius:4px;font-size:.84rem;line-height:1.55;color:var(--ink-soft);}
+  /* value chain flow */
+  .chainwrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 16px;overflow-x:auto;}
+  .chain{display:flex;align-items:stretch;gap:6px;min-width:760px;}
+  .stage{flex:1;min-width:92px;display:flex;flex-direction:column;}
+  .stage-head{font-size:.72rem;font-weight:700;color:var(--ink);margin-bottom:8px;min-height:30px;line-height:1.2;}
+  .stage-bar{border-radius:7px 7px 0 0;cursor:pointer;transition:filter .12s;display:flex;align-items:flex-end;justify-content:center;color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;padding-bottom:6px;}
+  .stage-bar:hover{filter:brightness(1.08);}
+  .stage-bar.sel{outline:3px solid var(--ink);outline-offset:-3px;}
+  .stage-foot{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);text-align:center;margin-top:6px;line-height:1.4;}
+  .arrow{align-self:center;color:var(--line);font-size:1.2rem;flex:0 0 auto;}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:16px;}
+  .panel h3{font-family:'Source Serif 4',Georgia,serif;font-size:1.1rem;margin-bottom:2px;}
+  .panel .sub{color:var(--muted);font-size:.78rem;margin-bottom:10px;}
+  .themes{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;}
+  .theme{font-family:'IBM Plex Mono',monospace;font-size:.64rem;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:3px 9px;color:var(--ink-soft);}
+  table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:10px;}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  td.num{text-align:right;font-family:'IBM Plex Mono',monospace;}
+  th{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+  .pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.58rem;padding:2px 7px;border-radius:10px;border:1px solid rgba(0,0,0,.12);}
+  .foot{font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--muted);text-align:center;margin-top:24px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">Healthcare AI · Value Chain</div>
+    <h1>Where the Money Flows in the Healthcare-AI Value Chain</h1>
+    <p class="subhead">948 companies mapped onto stakeholder journeys. Each stage is sized by capital raised (or company count). See which parts of the chain are funded and which are starved — and how different the picture looks depending on whose journey you follow.</p>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button data-view="overview" class="on">Overview</button>
+    <button data-view="provider">Provider journey</button>
+    <button data-view="patient">Patient journey</button>
+    <button data-view="payer">Payer pathway</button>
+  </div>
+  <div class="metric-toggle" id="metricToggle" style="display:none">
+    size stages by:
+    <label><input type="radio" name="metric" value="raised" checked> lifetime capital</label>
+    <label><input type="radio" name="metric" value="raised26"> 2026 funding</label>
+    <label><input type="radio" name="metric" value="companies"> company count</label>
+  </div>
+
+  <div id="stage"></div>
+  <div class="panel" id="panel"><span class="sub">Select a view above. In a journey view, click a stage to see its companies.</span></div>
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+const PATH_COLOR={provider:'#3f6d95',patient:'#1d7a6b',payer:'#b5802e'};
+const STAKE_COLOR={Provider:'#3f6d95',Payer:'#b5802e',Pharma:'#7a5ca8'};
+let DATA=null, VIEW='overview', METRIC='raised', SEL=null;
+const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fmt=v=>v>=1000?('$'+(v/1000).toFixed(1)+'B'):('$'+Math.round(v)+'M');
+
+fetch('pathways.json').then(r=>r.json()).then(d=>{DATA=d;init();})
+ .catch(e=>{document.getElementById('panel').innerHTML='<span class="sub">Could not load pathways.json — run <code>python build_pathways.py</code> and serve over http. '+e+'</span>';});
+
+function init(){
+  document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#tabs button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');VIEW=b.dataset.view;SEL=null;render();
+  }));
+  document.querySelectorAll('input[name=metric]').forEach(r=>r.addEventListener('change',e=>{METRIC=e.target.value;render();}));
+  render();
+  const reviewed=DATA.companies.filter(c=>c.attrSource==='reviewed').length;
+  document.getElementById('foot').innerHTML='Source: '+DATA.source+' · '+DATA.total+' companies · each company\u2019s capital is attributed to ONE primary stage (no double-counting across journeys). Attribution is rule-based ('+(DATA.total-reviewed)+') + hand-reviewed ('+reviewed+' high-dollar cases); ~75-85% accurate \u2014 treat as directional.';
+}
+
+function render(){
+  document.getElementById('metricToggle').style.display = VIEW==='overview'?'none':'block';
+  if(VIEW==='overview'){renderOverview();clearPanel();return;}
+  renderChain(VIEW);
+}
+
+function renderOverview(){
+  const s=DATA.overview.stakeholders;
+  const max=Math.max(...s.map(x=>x.companies));
+  const rows=s.map(x=>{
+    const w=Math.max(x.companies/max*100,4);
+    return '<div class="nest-row"><span class="nest-label">'+x.name+'</span>'+
+      '<div class="nest-bar" style="width:'+w+'%;background:'+STAKE_COLOR[x.name]+'">'+x.companies+' cos · '+fmt(x.raised)+'</div></div>';
+  }).join('');
+  document.getElementById('stage').innerHTML=
+    '<div class="ov-wrap"><div class="ov-title">The market is built for one buyer</div>'+
+    '<div class="ov-sub">How many of the 948 companies touch each stakeholder\'s workflows (sets overlap — a prior-auth tool serves both providers and payers). Bars are company counts.</div>'+
+    '<div class="nested">'+rows+'</div>'+
+    '<div class="ov-finding"><strong>Finding:</strong> virtually every company (947 of 948) sells to providers. Only ~215 touch payer workflows and ~69 are pharma-adjacent — and those are <em>subsets</em> of the provider-facing set, not separate markets. The healthcare-AI build-out is overwhelmingly a provider-tooling story; payer- and pharma-native platforms are comparatively rare (and a potential white space).</div>'+
+    '</div>';
+}
+
+function metricVal(s){return METRIC==='raised'?s.raised:METRIC==='raised26'?(s.raised26||0):s.companies;}
+const METRIC_LABEL={raised:'lifetime capital raised',raised26:'capital raised in 2026',companies:'company count'};
+
+function renderChain(view){
+  const p=DATA.pathways[view];
+  const stages=p.stages;
+  const vals=stages.map(metricVal);
+  const max=Math.max(...vals,1);
+  const color=PATH_COLOR[view];
+  let html='<div class="chainwrap"><div class="chain">';
+  stages.forEach((s,i)=>{
+    const v=metricVal(s);
+    const h=Math.max(v/max*220,14);
+    const barTxt=METRIC==='companies'?v:fmt(v);
+    const empty=s.companies===0;
+    const barStyle=empty
+      ? 'height:14px;background:repeating-linear-gradient(45deg,#e7e3d6,#e7e3d6 5px,#f3f1e8 5px,#f3f1e8 10px);border:1px dashed var(--line)'
+      : 'height:'+h+'px;background:'+color;
+    html+='<div class="stage">'+
+      '<div class="stage-head">'+esc(s.stage.replace(/^\d+\.\s*/,''))+'</div>'+
+      '<div class="stage-bar'+(SEL===s.stage?' sel':'')+'" style="'+barStyle+'" data-stage="'+encodeURIComponent(s.stage)+'">'+
+        (!empty&&h>28?barTxt:'')+'</div>'+
+      '<div class="stage-foot">'+(empty?'<span style="color:var(--accent)">no patient-facing tools</span>':(s.companies+' cos<br>'+fmt(s.raised)+' life<br><strong style="color:var(--ink-soft)">'+fmt(s.raised26||0)+' in 2026</strong>'))+'</div>'+
+      '</div>';
+    if(i<stages.length-1) html+='<span class="arrow">\u2192</span>';
+  });
+  html+='</div></div>';
+  // subtitle with the pathway label (flags payer as partial) + current metric
+  html='<p style="font-family:\'IBM Plex Mono\',monospace;font-size:.72rem;color:var(--muted);margin:4px 0 10px">'+esc(p.label)+' · bars sized by '+METRIC_LABEL[METRIC]+'</p>'+html;
+  document.getElementById('stage').innerHTML=html;
+  document.querySelectorAll('.stage-bar').forEach(b=>b.addEventListener('click',()=>{
+    SEL=decodeURIComponent(b.dataset.stage);renderChain(view);showStage(view,SEL);
+  }));
+}
+
+function clearPanel(){document.getElementById('panel').innerHTML='<span class="sub">In a journey view, click a stage to see its companies and product themes.</span>';}
+
+function stageKey(view){return view==='provider'?'providerStage':view==='patient'?'patientStage':'payerStage';}
+
+let SUBSEL=null;   // "Category › Subgroup" selection string
+function showStage(view,stage){ SUBSEL=null; renderStagePanel(view,stage); }
+
+function renderStagePanel(view,stage){
+  const key=stageKey(view);
+  let comps=DATA.companies.filter(c=>c[key]===stage);
+
+  // Build the shared "what they do" breakdown: category -> subgroup, each with capital.
+  // This is the SAME taxonomy as the market map (every company carries .subgroup).
+  const byCat={};
+  comps.forEach(c=>{
+    const cat=c.category||'(uncategorized)';
+    const sg=c.subgroup||'Other';
+    byCat[cat]=byCat[cat]||{};
+    const b=byCat[cat][sg]||(byCat[cat][sg]={n:0,raised:0,raised26:0,r26:0});
+    b.n++; b.raised+=c.raised; b.raised26+=(c.round2026||0); if(c.raised2026)b.r26++;
+  });
+  // flatten to rows, sorted by category size then subgroup capital
+  const catOrder=Object.keys(byCat).sort((a,b)=>
+    Object.values(byCat[b]).reduce((s,x)=>s+x.n,0)-Object.values(byCat[a]).reduce((s,x)=>s+x.n,0));
+  const allBars=[];
+  catOrder.forEach(cat=>{
+    const subs=Object.entries(byCat[cat]).sort((a,b)=>b[1].raised-a[1].raised);
+    subs.forEach(([sg,v])=>allBars.push({cat,sg,...v}));
+  });
+  const subVal=b=>METRIC==='raised26'?(b.raised26||0):b.raised;
+  const mx=Math.max(...allBars.map(subVal),1);
+
+  if(SUBSEL){
+    const [fc,fs]=SUBSEL.split(' \u203a ');
+    comps=comps.filter(c=>(c.category||'')===fc && (c.subgroup||'Other')===fs);
+  }
+  comps=comps.sort((a,b)=>b.raised-a.raised);
+  const raised=comps.reduce((a,b)=>a+b.raised,0);
+  const raised26=comps.reduce((a,b)=>a+(b.round2026||0),0);
+  const r26=comps.filter(c=>c.raised2026).length;
+  const reviewed=comps.filter(c=>c.attrSource==='reviewed').length;
+
+  // render grouped bars (category header + its subgroups)
+  let subHtml='<div style="font-family:\'IBM Plex Mono\',monospace;font-size:.64rem;color:var(--muted);margin:4px 0 6px">WHAT THEY DO — by category & sub-group (click to filter · sized by capital)</div>'+
+    '<div style="display:flex;flex-direction:column;gap:3px;margin-bottom:14px">';
+  let lastCat=null;
+  allBars.forEach(b=>{
+    if(b.cat!==lastCat){
+      subHtml+='<div style="font-size:.72rem;font-weight:700;color:'+(PATH_COLOR[view]||'var(--ink)')+';margin:6px 0 1px">'+esc(b.cat)+'</div>';
+      lastCat=b.cat;
+    }
+    const sel=b.cat+' \u203a '+b.sg;
+    const on=SUBSEL===sel;
+    const w=Math.max(subVal(b)/mx*100,2);
+    subHtml+='<div class="subbar-row" data-sub="'+encodeURIComponent(sel)+'" style="display:flex;align-items:center;gap:10px;cursor:pointer;padding-left:10px">'+
+      '<span style="width:210px;flex-shrink:0;font-size:.74rem;font-weight:'+(on?'700':'500')+';color:'+(on?'var(--accent)':'var(--ink-soft)')+'">'+esc(b.sg)+'</span>'+
+      '<div style="height:16px;width:'+w+'%;min-width:2px;background:'+(on?'var(--accent)':(PATH_COLOR[view]||'#888'))+';border-radius:3px;opacity:'+(on?'1':'.75')+'"></div>'+
+      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:.66rem;color:var(--muted);white-space:nowrap">'+b.n+' · '+fmt(b.raised)+' life'+(b.raised26?(' · '+fmt(b.raised26)+' in 2026'):'')+'</span>'+
+      '</div>';
+  });
+  subHtml+='</div>';
+
+  const rows=comps.slice(0,60).map(c=>
+    '<tr><td><strong>'+esc(c.name)+'</strong>'+
+      (c.description?'<div style="font-size:.72rem;color:var(--muted);line-height:1.4;margin-top:2px">'+esc(c.description)+'</div>':'')+
+    '</td>'+
+    '<td>'+esc(c.subgroup||'—')+'<div style="font-size:.66rem;color:var(--muted)">'+esc(c.category)+'</div></td>'+
+    '<td class="num">'+(c.raised?fmt(c.raised):'—')+'</td>'+
+    '<td class="num">'+(c.raised2026?'●':'')+'</td>'+
+    '<td>'+esc(c.hq||c.country||'—')+'</td></tr>').join('');
+  const crumb = SUBSEL ? (' › <span style="color:var(--accent)">'+esc(SUBSEL)+'</span> <a href="#" id="clearSub" style="font-size:.7rem;color:var(--muted)">(clear)</a>') : '';
+  document.getElementById('panel').innerHTML=
+    '<h3>'+esc(stage.replace(/^\d+\.\s*/,''))+crumb+'</h3>'+
+    '<div class="sub">'+comps.length+' companies · '+fmt(raised)+' lifetime · '+fmt(raised26)+' raised in 2026 ('+r26+' rounds)'+(comps.length>60?' · top 60 shown':'')+'</div>'+
+    subHtml+
+    '<table><thead><tr><th>Company &amp; what they do</th><th>Sub-group / category</th><th>Raised</th><th>2026</th><th>HQ</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  document.querySelectorAll('.subbar-row').forEach(el=>el.addEventListener('click',()=>{
+    const s=decodeURIComponent(el.dataset.sub);
+    SUBSEL=(SUBSEL===s)?null:s; renderStagePanel(view,stage);
+  }));
+  const cs=document.getElementById('clearSub');
+  if(cs)cs.addEventListener('click',e=>{e.preventDefault();SUBSEL=null;renderStagePanel(view,stage);});
+}
+</script>
+</body>
+</html>
